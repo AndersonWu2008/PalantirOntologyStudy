@@ -62,7 +62,7 @@ async function main() {
       runId: "eval-v46-demo-2024h2",
       strategyId: "v46-huimaqiang",
       packId: "v46Huimaqiang",
-      displayName: "涨停回马枪 V46 · 示意对照",
+      displayName: "涨停回马枪 · 示意对照",
       startDate: "2024-07-01",
       endDate: "2025-06-30",
       status: "完成",

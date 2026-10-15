@@ -88,7 +88,7 @@ function gateLine(row: Record<string, unknown>): string {
 function packLine(row: Record<string, unknown>): string {
   const pack = row.packId == null || row.packId === '' ? '' : String(row.packId);
   if (!pack) return '这一版还没写下用哪一套计算包。';
-  if (pack === 'v46Huimaqiang') return '挑股票的话在 v46Huimaqiang，点过去看 Function。';
+  if (pack === 'v46Huimaqiang') return '挑股票按涨停回马枪这一套，点过去看 Function。';
   return `挑股票的话在 ${pack}。`;
 }
 

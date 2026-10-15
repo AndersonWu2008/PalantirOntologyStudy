@@ -23,7 +23,7 @@ const PACKS: Record<PackId, StrategyPack> = {
   v46Huimaqiang: {
     packId: "v46Huimaqiang",
     formulaDoc: "docs/001_推导/43_V46策略本体.md",
-    displayName: "涨停回马枪 V46",
+    displayName: "涨停回马枪",
     requireBreadthGate: false,
     scoreUniverse: "allBars",
   },

@@ -21,3 +21,6 @@ pipeline/parity/v46_entry_parity_report.json
 /docs/000_Guideline/
 /docs/001_推导/
 /docs/design/
+
+# Local demo process logs.
+.demo/

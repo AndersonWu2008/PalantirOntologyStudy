@@ -2,7 +2,23 @@
 
 用一套能点开的页面，学 Palantir 的 Ontology 怎么装下一件具体的事。这件事是沪深 A 股的开盘安排：明天买什么、卖什么、还是空仓。
 
-类型、链接、函数、动作都落在这个仓库里。页面按 Foundry 的分法来组织，方便对照着看「这个词在屏幕上是哪一块」。
+一条命令就能看到这一版做法，名字叫 **涨停回马枪**：
+
+```bash
+./demo.sh
+```
+
+需要 Node.js 20、npm、Docker。脚本会起数据库、接口和页面，并写入演示账户、这一版做法、2026-10-15 的一页开盘安排。
+
+```mermaid
+flowchart LR
+  page["页面 :5173"] --> api["对象接口 :3010"]
+  api --> db["PostgreSQL :5436"]
+  scripts["pipeline 脚本"] --> api
+  types["ontology/v44 类型定义"] --> page
+```
+
+点图上的一个词，只出现一句人话。走查写在 [`docs/走查.md`](docs/走查.md)。
 
 ## 目录
 
@@ -21,7 +37,7 @@ Ontology 是给一个领域用的类型模型：有哪些东西可以单独点�
 
 这里的领域是 **StockTrading**。一只股票、一个交易日、一条日行情、一版做法、一页开盘安排，各是一种对象。改一版做法上的数，会新写一只对象；已经写下的开盘安排还指着当时那一版。
 
-当前这一版做法叫 **涨停回马枪 V46**（`strategyId` 是 `v46-huimaqiang`）。袖套上的数钉在这只对象上。选股顺序写在函数包 `v46Huimaqiang` 里，实现在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。
+当前这一版做法叫 **涨停回马枪**。地址里的编号是 `v46-huimaqiang`。袖套上的数钉在这只对象上。选股顺序写在函数包里，实现在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。
 
 ## 你会看到什么
 
@@ -29,9 +45,9 @@ Ontology 是给一个领域用的类型模型：有哪些东西可以单独点�
 | --- | --- |
 | 课程 | http://localhost:5173/course |
 | 全部对象类型 | http://localhost:5173/ontology |
-| 某一只对象，例如 V46 | http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang |
+| 涨停回马枪 | http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang |
 | 回马枪怎么挑股票 | http://localhost:5173/ontology/manager?section=function&type=computeHuimaqiangFactors&kind=function |
-| 明早那一页 | http://localhost:5173/workshop/pre-open |
+| 明早那一页 | http://localhost:5173/workshop/pre-open?date=2026-10-15 |
 
 点图上的一个词，只出现一句人话。第二句收在「再看一句」里。
 
@@ -43,7 +59,14 @@ Ontology 是给一个领域用的类型模型：有哪些东西可以单独点�
 - npm
 - Docker（用来起 PostgreSQL）
 
-克隆之后，在仓库根目录开三个终端。
+克隆之后，在仓库根目录执行：
+
+```bash
+chmod +x demo.sh
+./demo.sh
+```
+
+想自己看每个进程，再按下面三步开。
 
 **1. 数据库**
 
@@ -88,16 +111,6 @@ npm run dev
 
 点登录。这组账号只在开发模式里生效，用来进页面，没有接生产登录服务。
 
-三个进程都起来之后，关系是这样：
-
-```mermaid
-flowchart LR
-  page["页面 :5173"] --> api["对象接口 :3010"]
-  api --> db["PostgreSQL :5436"]
-  scripts["pipeline 脚本"] --> api
-  types["ontology/v44 类型定义"] --> page
-```
-
 ## 使用指南
 
 按这个顺序看。每一步只做一件事。
@@ -112,13 +125,13 @@ flowchart LR
 
 ### 2. 看一版钉死的数
 
-库里已经有 `v46-huimaqiang` 时，打开：
+`./demo.sh` 写好之后，打开：
 
 http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang
 
 图上是这一版的袖套：牛市、高波动、震荡、熊市、价带、门、计算包。点 **牛市**，会看到这一套止盈、回落、天数、只数和仓位。点 **计算包**，会跳到选股函数。
 
-对象列表在 http://localhost:5173/ontology?focus=Strategy 。点中 **涨停回马枪 V46** 那一行，同一张图会出现在表格上方。
+对象列表在 http://localhost:5173/ontology?focus=Strategy 。点中 **涨停回马枪** 那一行，同一张图会出现在表格上方。
 
 空库时这里没有这一行。类型页看得到「做法」，对象页要等数据写进来。见下面「把对象写进库」。
 
@@ -161,13 +174,13 @@ npx tsx pipeline/action-server.ts
 
 [`pipeline/sync-pool.ts`](pipeline/sync-pool.ts) 读取本机的 `/tmp/pool-stocks.json` 和 `/tmp/pool-bars.jsonl`，把股票和日行情写进接口。这两个文件要自己准备。
 
-已有做法 `v44` 时，可以用下面的命令再发布 V46。它读取 `v44`，写下 `v46-huimaqiang`：
+已有做法 `v44` 时，可以用下面的命令再写下涨停回马枪。它读取 `v44`，写下 `v46-huimaqiang`：
 
 ```bash
 npx tsx pipeline/publish-v46-strategy.ts
 ```
 
-库里没有 `v44` 时，这条命令会失败。先把那一版做法写进接口，再发布 V46。
+库里没有 `v44` 时，这条命令会失败。演示不走这条。`./demo.sh` 会直接写入涨停回马枪。
 
 其他脚本都在 [`pipeline/`](pipeline/)，通过环境变量 `DATABASE_API`（默认 `http://localhost:3010`）访问对象接口。
 
@@ -189,9 +202,11 @@ ontology/v44/          对象类型、链接、值类型、logic.json
 database-api/          唯一访问 PostgreSQL 的 HTTP 接口，端口 3010
 frontend/              课程页和 Foundry 风格的各个页面，端口 5173
 pipeline/              收盘、开盘、同步、回马枪函数、动作
+docs/走查.md           十分钟看完涨停回马枪
 docs/000_Overview/     从「明天要提交什么」往回推
 docs/000_Stock_Object_Type/   A 股类型目录
 CONTEXT.md             Palantir 词和这个领域里的词
+demo.sh                一键起演示
 docker-compose.yml     本地 Postgres
 ```
 
@@ -199,9 +214,10 @@ docker-compose.yml     本地 Postgres
 
 ## 建议的阅读顺序
 
-1. [`CONTEXT.md`](CONTEXT.md) — 这些英文词在这里指什么。
-2. [`docs/000_Overview/README.md`](docs/000_Overview/README.md) — 从明天要交的动作，推回要先有哪些对象。
-3. [`docs/000_Stock_Object_Type/README.md`](docs/000_Stock_Object_Type/README.md) — A 股这一组类型的清单。
+1. [`docs/走查.md`](docs/走查.md) — 跑 `./demo.sh` 之后点哪四页。
+2. [`CONTEXT.md`](CONTEXT.md) — 这些英文词在这里指什么。
+3. [`docs/000_Overview/README.md`](docs/000_Overview/README.md) — 从明天要交的动作，推回要先有哪些对象。
+4. [`docs/000_Stock_Object_Type/README.md`](docs/000_Stock_Object_Type/README.md) — A 股这一组类型的清单。
 
 课程页把同一条线索收成可以点的章节：http://localhost:5173/course 。
 
