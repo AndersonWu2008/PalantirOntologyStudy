@@ -13,6 +13,7 @@
 - [仓库里各放什么](#仓库里各放什么)
 - [建议的阅读顺序](#建议的阅读顺序)
 - [这个仓库不包含什么](#这个仓库不包含什么)
+- [许可证](#许可证)
 
 ## 它解决什么
 
@@ -209,4 +210,8 @@ docker-compose.yml     本地 Postgres
 - 不做美股、港股，也不做 GICS。股票池按文档里的沪深 A 股来设计。
 - 分钟线和逐笔不在这一版。
 - `local/`、`OntologyAnalysis/`、`old/` 留在作者机器上，没有放进仓库。`docs/000_Guideline/`、`docs/001_推导/`、`docs/design/` 也留在本机。回测金样和行情大文件也没有放进来。
-- 没有单独的许可证文件。引用 Palantir、Foundry 的名字，是为了对照学习这些概念，本仓库不是 Palantir 的产品。
+- 引用 Palantir、Foundry 的名字，是为了对照学习这些概念，本仓库不是 Palantir 的产品。
+
+## 许可证
+
+本仓库采用 [MIT License](LICENSE)。版权人是 AndersonWu2008。
