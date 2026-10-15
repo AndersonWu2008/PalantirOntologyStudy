@@ -16,3 +16,8 @@ pipeline/parity/v46_entry_parity_report.json
 
 # Course spine. Stays on this machine.
 /local/
+
+# Author notes. Stay on this machine.
+/docs/000_Guideline/
+/docs/001_推导/
+/docs/design/

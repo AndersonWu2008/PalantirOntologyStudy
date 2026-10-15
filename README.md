@@ -20,7 +20,7 @@ Ontology 是给一个领域用的类型模型：有哪些东西可以单独点�
 
 这里的领域是 **StockTrading**。一只股票、一个交易日、一条日行情、一版做法、一页开盘安排，各是一种对象。改一版做法上的数，会新写一只对象；已经写下的开盘安排还指着当时那一版。
 
-当前这一版做法叫 **涨停回马枪 V46**（`strategyId` 是 `v46-huimaqiang`）。袖套上的数钉在这只对象上。选股顺序写在函数包 `v46Huimaqiang` 里，公式说明在 [`docs/001_推导/43_V46策略本体.md`](docs/001_推导/43_V46策略本体.md)。
+当前这一版做法叫 **涨停回马枪 V46**（`strategyId` 是 `v46-huimaqiang`）。袖套上的数钉在这只对象上。选股顺序写在函数包 `v46Huimaqiang` 里，实现在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。
 
 ## 你会看到什么
 
@@ -138,13 +138,13 @@ http://localhost:5173/ontology/manager?section=function&type=computeHuimaqiangFa
 | `selectHuimaqiangBuys` | 门开着才买，只数和名次读做法对象 |
 | `judgeHuimaqiangExits` | 卖出时读买进那天那一套止盈和天数 |
 
-公式的书面说明在 [`docs/001_推导/43_V46策略本体.md`](docs/001_推导/43_V46策略本体.md)。实现在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。
+实现在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。书面公式留在作者本机的 `docs/001_推导/`，没有放进这个仓库。
 
 ### 4. 看明早那一页
 
 打开 http://localhost:5173/workshop/pre-open 。
 
-这一页是一次开盘安排：属于哪个账户、哪个交易日、用的哪一版做法，以及两行计划（买、卖）。库里还没有安排时，页面是空的。安排由收盘管道写下，开盘管道再补涨停价和跌停价。顺序写在 [`docs/001_推导/27_跑通这一版做法.md`](docs/001_推导/27_跑通这一版做法.md)。
+这一页是一次开盘安排：属于哪个账户、哪个交易日、用的哪一版做法，以及两行计划（买、卖）。库里还没有安排时，页面是空的。安排由收盘管道写下，开盘管道再补涨停价和跌停价。
 
 人确认之后才写委托。提交走动作服务，默认端口 `3020`：
 
@@ -188,10 +188,8 @@ ontology/v44/          对象类型、链接、值类型、logic.json
 database-api/          唯一访问 PostgreSQL 的 HTTP 接口，端口 3010
 frontend/              课程页和 Foundry 风格的各个页面，端口 5173
 pipeline/              收盘、开盘、同步、回马枪函数、动作
-docs/000_Guideline/    写类型时守的规矩
 docs/000_Overview/     从「明天要提交什么」往回推
 docs/000_Stock_Object_Type/   A 股类型目录
-docs/001_推导/          一次只定一件事，V46 在第 43 篇
 CONTEXT.md             Palantir 词和这个领域里的词
 docker-compose.yml     本地 Postgres
 ```
@@ -201,10 +199,8 @@ docker-compose.yml     本地 Postgres
 ## 建议的阅读顺序
 
 1. [`CONTEXT.md`](CONTEXT.md) — 这些英文词在这里指什么。
-2. [`docs/000_Guideline/README.md`](docs/000_Guideline/README.md) — 按章号读。底座不跟着领域改，领域上的对象可以整组换。
-3. [`docs/000_Overview/README.md`](docs/000_Overview/README.md) — 从明天要交的动作，推回要先有哪些对象。
-4. [`docs/000_Stock_Object_Type/README.md`](docs/000_Stock_Object_Type/README.md) — A 股这一组类型的清单。
-5. [`docs/001_推导/43_V46策略本体.md`](docs/001_推导/43_V46策略本体.md) — 回马枪这一版的公式。V44 的公式在 [第 13 篇](docs/001_推导/13_V44策略本体.md)，两套分开。
+2. [`docs/000_Overview/README.md`](docs/000_Overview/README.md) — 从明天要交的动作，推回要先有哪些对象。
+3. [`docs/000_Stock_Object_Type/README.md`](docs/000_Stock_Object_Type/README.md) — A 股这一组类型的清单。
 
 课程页把同一条线索收成可以点的章节：http://localhost:5173/course 。
 
@@ -212,5 +208,5 @@ docker-compose.yml     本地 Postgres
 
 - 不做美股、港股，也不做 GICS。股票池按文档里的沪深 A 股来设计。
 - 分钟线和逐笔不在这一版。
-- `local/`、`OntologyAnalysis/`、`old/` 留在作者机器上，没有放进仓库。回测金样和行情大文件也没有放进来。
+- `local/`、`OntologyAnalysis/`、`old/` 留在作者机器上，没有放进仓库。`docs/000_Guideline/`、`docs/001_推导/`、`docs/design/` 也留在本机。回测金样和行情大文件也没有放进来。
 - 没有单独的许可证文件。引用 Palantir、Foundry 的名字，是为了对照学习这些概念，本仓库不是 Palantir 的产品。
