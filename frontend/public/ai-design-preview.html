@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontology AI 功能设计组件预览</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Arctic Theme (Default Light) */
+            --primary: #0EA5E9;
+            --primary-hover: #0284C7;
+            --primary-light: #E0F2FE;
+            --ai-accent: #8B5CF6;
+            --ai-accent-hover: #7C3AED;
+            --ai-accent-light: #EDE9FE;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --surface-hover: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #64748B;
+            --text-tertiary: #94A3B8;
+            --border: #E2E8F0;
+            --border-light: #F1F5F9;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+        }
+
+        [data-theme="midnight"] {
+            --primary: #3B82F6;
+            --primary-hover: #60A5FA;
+            --primary-light: #1E3A8A;
+            --ai-accent: #A78BFA;
+            --ai-accent-hover: #C4B5FD;
+            --ai-accent-light: #4C1D95;
+            --background: #0F172A;
+            --surface: #1E293B;
+            --surface-hover: #334155;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-tertiary: #64748B;
+            --border: #334155;
+            --border-light: #1E293B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--ai-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .theme-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        .theme-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .theme-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .section {
+            margin-bottom: 64px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--ai-accent-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .component-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .component-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* AI Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, var(--ai-accent) 0%, #A855F7 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ai::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-ai:hover::before {
+            left: 100%;
+        }
+
+        .btn-ai:hover {
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-ai-outline {
+            background: transparent;
+            color: var(--ai-accent);
+            border: 1.5px solid var(--ai-accent);
+        }
+
+        .btn-ai-outline:hover {
+            background: var(--ai-accent-light);
+        }
+
+        .btn-ai-ghost {
+            background: var(--ai-accent-light);
+            color: var(--ai-accent);
+        }
+
+        .btn-ai-ghost:hover {
+            background: var(--ai-accent);
+            color: white;
+        }
+
+        /* AI Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-ai {
+            background: var(--ai-accent-light);
+            color: var(--ai-accent);
+        }
+
+        .badge-ai-glow {
+            background: var(--ai-accent);
+            color: white;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+        }
+
+        .badge-quick {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* AI Modal Preview */
+        .modal-preview {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            max-width: 800px;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-title .ai-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--ai-accent) 0%, #A855F7 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 24px;
+            min-height: 300px;
+        }
+
+        .suggestion-section {
+            margin-bottom: 24px;
+        }
+
+        .suggestion-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .suggestion-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.15s ease;
+        }
+
+        .suggestion-card:hover {
+            border-color: var(--ai-accent);
+            box-shadow: 0 0 0 3px var(--ai-accent-light);
+        }
+
+        .suggestion-content {
+            flex: 1;
+        }
+
+        .suggestion-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .suggestion-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .suggestion-value.new {
+            color: var(--ai-accent);
+        }
+
+        .suggestion-arrow {
+            color: var(--text-tertiary);
+            margin: 0 16px;
+        }
+
+        .suggestion-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Loading States */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+            gap: 16px;
+        }
+
+        .ai-spinner {
+            width: 48px;
+            height: 48px;
+            position: relative;
+        }
+
+        .ai-spinner::before,
+        .ai-spinner::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .ai-spinner::before {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--ai-accent) 0%, transparent 70%);
+            opacity: 0.3;
+        }
+
+        .ai-spinner::after {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background: var(--ai-accent);
+            animation: pulse 2s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        .step.active {
+            color: var(--ai-accent);
+        }
+
+        .step.completed {
+            color: var(--success);
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .step.active .step-dot {
+            background: var(--ai-accent);
+            box-shadow: 0 0 0 4px var(--ai-accent-light);
+        }
+
+        .step.completed .step-dot {
+            background: var(--success);
+        }
+
+        .step-line {
+            width: 24px;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .step-line.completed {
+            background: var(--success);
+        }
+
+        /* AI Input Enhancement */
+        .ai-input-wrapper {
+            position: relative;
+        }
+
+        .ai-input {
+            width: 100%;
+            padding: 12px 16px;
+            padding-right: 120px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-family: inherit;
+            background: var(--surface);
+            color: var(--text-primary);
+            transition: all 0.15s ease;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--ai-accent);
+            box-shadow: 0 0 0 3px var(--ai-accent-light);
+        }
+
+        .ai-input-action {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Comparison View */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .comparison-panel {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .comparison-panel h4 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: 12px;
+        }
+
+        .comparison-panel.current {
+            border-color: var(--border);
+        }
+
+        .comparison-panel.suggested {
+            border-color: var(--ai-accent);
+            background: var(--ai-accent-light);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--ai-accent-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ai-accent);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1E293B;
+            border-radius: var(--radius-md);
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #E2E8F0;
+            overflow-x: auto;
+        }
+
+        .code-block .comment {
+            color: #64748B;
+        }
+
+        .code-block .keyword {
+            color: #C084FC;
+        }
+
+        .code-block .string {
+            color: #4ADE80;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+            margin-top: 64px;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ontology AI 功能设计组件</h1>
+            <p class="subtitle">AI 辅助数据创建功能的视觉设计规范与组件预览</p>
+            <div class="theme-switcher">
+                <button class="theme-btn active" onclick="setTheme('arctic')">Arctic (Light)</button>
+                <button class="theme-btn" onclick="setTheme('midnight')">Midnight (Dark)</button>
+            </div>
+        </header>
+
+        <!-- AI Buttons Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="icon">🤖</span>
+                AI 按钮样式
+            </h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>主要 AI 按钮</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <button class="btn btn-ai">
+                            <span>✨</span>
+                            AI Optimize / AI 优化
+                        </button>
+                        <button class="btn btn-ai">
+                            <span>⚡</span>
+                            快速建议
+                        </button>
+                        <button class="btn btn-ai">
+                            <span>🎯</span>
+                            智能填充
+                        </button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>次要 AI 按钮</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <button class="btn btn-ai-outline">
+                            <span>✨</span>
+                            AI 优化
+                        </button>
+                        <button class="btn btn-ai-ghost">
+                            <span>🤖</span>
+                            获取建议
+                        </button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>AI 标签徽章</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <span class="badge badge-ai">
+                            <span>🤖</span> AI 建议
+                        </span>
+                        <span class="badge badge-ai-glow">
+                            <span>✨</span> 智能推荐
+                        </span>
+                        <span class="badge badge-quick">
+                            <span>⚡</span> 即时
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Modal Section -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="icon">🪟</span>
+                AI Optimize 弹窗设计
+            </h2>
+            <div class="modal-preview">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <div class="ai-icon">🤖</div>
+                        <span>AI 优化建议</span>
+                        <span class="badge badge-ai" style="margin-left: 8px;">实时</span>
+                    </div>
+                    <button style="background: none; border: none; color: var(--text-tertiary); cursor: pointer; font-size: 20px;">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Progress Steps -->
+                    <div class="progress-steps">
+                        <div class="step completed">
+                            <div class="step-dot"></div>
+                            <span>分析</span>
+                        </div>
+                        <div class="step-line completed"></div>
+                        <div class="step completed">
+                            <div class="step-dot"></div>
+                            <span>匹配</span>
+                        </div>
+                        <div class="step-line completed"></div>
+                        <div class="step active">
+                            <div class="step-dot"></div>
+                            <span>生成建议</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Suggestions -->
+                    <div class="suggestion-section">
+                        <div class="suggestion-header">
+                            <span>⚡</span>
+                            <span>快速建议 (缓存)</span>
+                            <span class="badge badge-quick">&lt; 100ms</span>
+                        </div>
+                        <div class="suggestion-card">
+                            <div class="suggestion-content">
+                                <div class="suggestion-value">Id, Name, Status, CreatedAt, UpdatedAt</div>
+                            </div>
+                            <div class="suggestion-actions">
+                                <button class="btn btn-primary btn-sm">查看</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Suggestions -->
+                    <div class="suggestion-section">
+                        <div class="suggestion-header">
+                            <span>🤖</span>
+                            <span>AI 优化结果</span>
+                            <span class="badge badge-ai">2.3s</span>
+                        </div>
+                        
+                        <div class="suggestion-card">
+                            <div class="suggestion-content">
+                                <div class="suggestion-label">名称优化</div>
+                                <div style="display: flex; align-items: center; margin-top: 4px;">
+                                    <span class="suggestion-value" style="text-decoration: line-through; color: var(--text-tertiary);">MotorController</span>
+                                    <span class="suggestion-arrow">→</span>
+                                    <span class="suggestion-value new">MotorControlUnit</span>
+                                </div>
+                            </div>
+                            <div class="suggestion-actions">
+                                <button class="btn btn-ai btn-sm">应用</button>
+                            </div>
+                        </div>
+
+                        <div class="suggestion-card">
+                            <div class="suggestion-content">
+                                <div class="suggestion-label">描述优化</div>
+                                <div style="display: flex; align-items: center; margin-top: 4px;">
+                                    <span class="suggestion-value" style="text-decoration: line-through; color: var(--text-tertiary);">用于控制电机的设备</span>
+                                    <span class="suggestion-arrow">→</span>
+                                    <span class="suggestion-value new">电机控制单元，用于精确控制电机转速、转向和扭矩</span>
+                                </div>
+                            </div>
+                            <div class="suggestion-actions">
+                                <button class="btn btn-ai btn-sm">应用</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading States -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="icon">⏳</span>
+                加载状态
+            </h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>AI 分析中</h3>
+                    <div class="loading-container">
+                        <div class="ai-spinner"></div>
+                        <div class="loading-text loading-dots">AI 正在分析您的数据</div>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>混合推荐流程</h3>
+                    <div style="padding: 24px;">
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="color: var(--success);">✓</span>
+                                <span>快速建议已加载 (45ms)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="ai-spinner" style="width: 16px; height: 16px;"></div>
+                                <span>AI 深度分析中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Input Enhancement -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="icon">📝</span>
+                AI 输入增强
+            </h2>
+            <div class="component-card">
+                <h3>带 AI 辅助的输入框</h3>
+                <div class="ai-input-wrapper" style="margin-bottom: 16px;">
+                    <input type="text" class="ai-input" placeholder="输入实体名称，AI 将提供优化建议..." value="MotorController">
+                    <div class="ai-input-action">
+                        <button class="btn btn-ai btn-sm">✨ 优化</button>
+                    </div>
+                </div>
+                <div class="ai-input-wrapper">
+                    <input type="text" class="ai-input" placeholder="输入描述..." value="用于控制电机的设备">
+                    <div class="ai-input-action">
+                        <button class="btn btn-ai-ghost btn-sm">📝 扩写</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison View -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="icon">⚖️</span>
+                对比视图
+            </h2>
+            <div class="component-card">
+                <h3>Before / After 对比</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-panel current">
+                        <h4>当前</h4>
+                        <div style="margin-top: 12px;">
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px;">名称</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">MotorController</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px;">描述</div>
+                                <div style="font-size: 14px;">用于控制电机的设备</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comparison-panel suggested">
+                        <h4>AI 建议</h4>
+                        <div style="margin-top: 12px;">
+                            <div style="margin-bottom: 12px;">
+                                <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px;">名称</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ai-accent);">MotorControlUnit</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px;">描述</div>
+                                <div style="font-size: 14px;">电机控制单元，用于精确控制电机转速、转向和扭矩</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CSS Variables -->
+        <section class="section">
+            <h2 class="section-title">
+                <span class="icon">🎨</span>
+                CSS 变量定义
+            </h2>
+            <div class="component-card">
+                <h3>AI 功能专用变量</h3>
+                <div class="code-block">
+<span class="comment">/* AI 品牌色 */</span>
+--ai-accent: <span class="string">#8B5CF6</span>;           <span class="comment">/* 紫罗兰 - AI 功能主色 */</span>
+--ai-accent-hover: <span class="string">#7C3AED</span>;      <span class="comment">/* 悬停状态 */</span>
+--ai-accent-light: <span class="string">#EDE9FE</span>;      <span class="comment">/* 浅色背景 */</span>
+
+<span class="comment">/* 使用场景 */</span>
+<span class="comment">/* Primary AI Button */</span>
+<span class="keyword">background</span>: <span class="keyword">linear-gradient</span>(135deg, var(--ai-accent) 0%, #A855F7 100%);
+
+<span class="comment">/* AI Badge */</span>
+<span class="keyword">background</span>: var(--ai-accent-light);
+<span class="keyword">color</span>: var(--ai-accent);
+
+<span class="comment">/* Focus Ring */</span>
+<span class="keyword">box-shadow</span>: 0 0 0 3px var(--ai-accent-light);
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Ontology AI 功能设计系统 | 基于 Refined Minimalism 美学方向</p>
+            <p style="margin-top: 8px; font-size: 12px;">AI 品牌色: #8B5CF6 (紫罗兰) | 字体: Inter + JetBrains Mono</p>
+        </footer>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

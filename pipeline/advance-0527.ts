@@ -1,0 +1,118 @@
+/**
+ * 05-26 已 ConfirmBuys + ReportFill。
+ * 推进：补 05-26 池缺口 → 组 05-27 收盘页 → 开盘。
+ * 若有可写入卖出/买入，本脚本只打印；卖出确认另用 fill 脚本或本文件后续步骤。
+ */
+import { listObjects } from "./api.ts";
+import { confirmSells, reportFill } from "./actions.ts";
+import { runClosePipeline, runOpenPipeline } from "./close-pipeline.ts";
+import { fillPoolGaps, findPoolGaps } from "./pool-gaps.ts";
+
+const priorDate = "2026-05-26";
+const nextDate = "2026-05-27";
+
+async function main(): Promise<void> {
+  console.log("GAPS_BEFORE", await findPoolGaps(priorDate));
+  console.log("GAPS_FILLED", await fillPoolGaps(priorDate));
+
+  const closed = await runClosePipeline("acct-1", nextDate, `${nextDate}T08:00:00+08:00`);
+  const sells = await listObjects(`/sell-lines?arrangementId=${encodeURIComponent(String(closed.arrangementId))}`);
+  const buys = await listObjects(`/buy-lines?arrangementId=${encodeURIComponent(String(closed.arrangementId))}`);
+  console.log(
+    "CLOSE_0527",
+    JSON.stringify({
+      arrangementId: closed.arrangementId,
+      header: closed.header,
+      entryGate: closed.entryGate,
+      selectionMissing: closed.selectionMissing,
+      sells: sells.map((line) => ({
+        ticker: line.ticker,
+        reason: line.reason,
+        quantity: line.plannedQuantity,
+        limit: line.plannedLimitPrice,
+      })),
+      buys: buys.map((line) => ({
+        ticker: line.ticker,
+        rank: line.rank,
+        quantity: line.plannedQuantity,
+        limit: line.plannedLimitPrice,
+      })),
+    }),
+  );
+
+  const opened = await runOpenPipeline("acct-1", nextDate, `${nextDate}T09:26:00+08:00`);
+  console.log("OPEN_0527", JSON.stringify(opened));
+
+  const openSells = await listObjects(`/sell-lines?arrangementId=${encodeURIComponent(String(opened.arrangementId))}`);
+  const openBuys = await listObjects(`/buy-lines?arrangementId=${encodeURIComponent(String(opened.arrangementId))}`);
+  console.log(
+    "OPEN_LINES",
+    JSON.stringify({
+      sells: openSells.map((line) => ({
+        ticker: line.ticker,
+        outcome: line.outcome,
+        reason: line.reason,
+        submitQuantity: line.submitQuantity,
+        submitLimitPrice: line.submitLimitPrice,
+      })),
+      buys: openBuys.map((line) => ({
+        ticker: line.ticker,
+        outcome: line.outcome,
+        submitQuantity: line.submitQuantity,
+        submitLimitPrice: line.submitLimitPrice,
+      })),
+    }),
+  );
+
+  const writableSells = openSells.filter((line) =>
+    ["可写入委托", "挂涨停价", "卖掉可卖的其余今天卖不掉"].includes(String(line.outcome ?? "")),
+  );
+
+  if (writableSells.length > 0) {
+    const confirmed = await confirmSells("acct-1", nextDate, `${nextDate}T09:26:00+08:00`, "交易员");
+    console.log("CONFIRM_SELLS", JSON.stringify(confirmed));
+    const orders = await listObjects("/sell-orders");
+    const ours = orders.filter(
+      (order) => String(order.orderId).includes(`${nextDate}|`) && String(order.executionStatus) === "未执行",
+    );
+    for (const order of ours) {
+      const ticker = String(order.sellLineId).split("|").pop();
+      const filled = await reportFill({
+        orderId: String(order.orderId),
+        side: "卖出",
+        price: Number(order.limitPrice),
+        quantity: Number(order.quantity),
+        sessionDate: nextDate,
+        actor: "交易员",
+      });
+      console.log("FILL_SELL", JSON.stringify({ ticker, price: order.limitPrice, quantity: order.quantity, ...filled }));
+    }
+  } else {
+    console.log("NO_WRITABLE_SELLS");
+  }
+
+  const writableBuys = openBuys.filter((line) => line.outcome === "可写入委托");
+  console.log("WRITABLE_BUYS", writableBuys.length, writableBuys.map((line) => line.ticker));
+
+  const positions = await listObjects("/positions?accountId=acct-1");
+  console.log(
+    "POSITIONS",
+    JSON.stringify(
+      positions
+        .filter((row) => Number(row.quantity) > 0)
+        .map((row) => ({
+          ticker: row.ticker,
+          quantity: row.quantity,
+          daysHeld: row.daysHeld,
+          exitState: row.exitState,
+          exitReason: row.exitReason,
+          entryDate: row.entryDate,
+        })),
+    ),
+  );
+}
+
+main().catch((error: unknown) => {
+  console.error(error instanceof Error ? error.message : error);
+  process.exit(1);
+});

@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/value-type.schema.json",
+  "id": "iso-3166-alpha-2",
+  "rid": "ri.ontology.study.value-type.iso-3166-alpha-2",
+  "apiName": "Iso3166Alpha2",
+  "displayName": "ISO 3166-1 alpha-2",
+  "description": "Two-letter country code of incorporation or market country.",
+  "baseType": { "type": "string" },
+  "constraints": [
+    { "type": "regex", "pattern": "^[A-Z]{2}$" }
+  ]
+}

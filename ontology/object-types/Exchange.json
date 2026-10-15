@@ -1,0 +1,85 @@
+{
+  "$schema": "../schema/object-type.schema.json",
+  "id": "exchange",
+  "rid": "ri.ontology.study.object-type.exchange",
+  "apiName": "Exchange",
+  "displayName": "Exchange",
+  "pluralDisplayName": "Exchanges",
+  "description": "A regulated market identified by MIC where stocks list.",
+  "groups": ["equities"],
+  "icon": { "name": "bank", "color": "#52c41a" },
+  "status": "experimental",
+  "visibility": "normal",
+  "primaryKey": "mic",
+  "titleKey": "name",
+  "properties": {
+    "mic": {
+      "id": "mic",
+      "rid": "ri.ontology.study.property.exchange.mic",
+      "apiName": "mic",
+      "displayName": "MIC",
+      "description": "ISO 10383 Market Identifier Code, e.g. XNAS.",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "string" },
+      "required": true,
+      "valueType": "Mic",
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "identifier": true
+      }
+    },
+    "name": {
+      "id": "name",
+      "rid": "ri.ontology.study.property.exchange.name",
+      "apiName": "name",
+      "displayName": "Name",
+      "description": "Exchange display name.",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "country": {
+      "id": "country",
+      "rid": "ri.ontology.study.property.exchange.country",
+      "apiName": "country",
+      "displayName": "Country",
+      "description": "ISO 3166-1 alpha-2 country code.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "sharedProperty": "country",
+      "valueType": "Iso3166Alpha2",
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      }
+    },
+    "timezone": {
+      "id": "timezone",
+      "rid": "ri.ontology.study.property.exchange.timezone",
+      "apiName": "timezone",
+      "displayName": "Timezone",
+      "description": "IANA timezone of the trading session.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true
+      }
+    }
+  }
+}

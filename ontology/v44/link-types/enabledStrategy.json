@@ -1,0 +1,16 @@
+{
+  "apiName": "enabledStrategy",
+  "displayName": "启用的做法",
+  "description": "这一户当前启用的一版做法。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Account",
+    "apiName": "enabledStrategy",
+    "displayName": "启用的做法"
+  },
+  "target": {
+    "objectType": "Strategy",
+    "apiName": "accounts",
+    "displayName": "账户"
+  }
+}

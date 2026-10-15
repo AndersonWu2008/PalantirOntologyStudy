@@ -1,0 +1,25 @@
+.vertex-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  gap: 16px;
+  align-items: start;
+}
+
+.vertex-canvas-wrap {
+  overflow: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.vertex-canvas {
+  display: block;
+  min-height: 280px;
+  min-width: 100%;
+}
+
+@media (max-width: 960px) {
+  .vertex-layout {
+    grid-template-columns: 1fr;
+  }
+}

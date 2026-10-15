@@ -1,0 +1,46 @@
+/**
+ * Empty State Styles
+ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-10);
+  text-align: center;
+  min-height: 300px;
+
+  &__icon {
+    font-size: 48px;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+    opacity: 0.5;
+
+    svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0 0 var(--space-2) 0;
+  }
+
+  &__description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--space-4) 0;
+    max-width: 400px;
+    line-height: var(--line-height-relaxed);
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+}

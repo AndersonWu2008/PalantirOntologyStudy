@@ -1,0 +1,16 @@
+{
+  "apiName": "usesUniverse",
+  "displayName": "做法用哪个范围",
+  "description": "这一版做法的可买范围。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Strategy",
+    "apiName": "universe",
+    "displayName": "可买范围"
+  },
+  "target": {
+    "objectType": "TradableRange",
+    "apiName": "strategies",
+    "displayName": "做法"
+  }
+}

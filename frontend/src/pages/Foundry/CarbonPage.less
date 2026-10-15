@@ -1,0 +1,38 @@
+.carbon-menubar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.carbon-menubar__label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.carbon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.carbon-module__app {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand, var(--color-primary));
+  font-weight: 600;
+}
+
+.carbon-module.is-primary {
+  border-color: var(--brand, var(--color-primary));
+  box-shadow: inset 3px 0 0 0 var(--brand, var(--color-primary));
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "industry",
+  "rid": "ri.ontology.study.object-type.industry",
+  "apiName": "Industry",
+  "displayName": "行业",
+  "pluralDisplayName": "行业",
+  "description": "供行业上限点名的行业。不把空行业收成一类。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "apartment",
+    "color": "#722ed1"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "industryId",
+  "titleKey": "displayName",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.industry.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "industryId": {
+      "id": "industry-id",
+      "rid": "ri.ontology.study.property.industry.industry-id",
+      "apiName": "industryId",
+      "displayName": "行业身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "displayName": {
+      "id": "display-name",
+      "rid": "ri.ontology.study.property.industry.display-name",
+      "apiName": "displayName",
+      "displayName": "行业名称",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    }
+  }
+}

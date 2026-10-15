@@ -1,0 +1,16 @@
+{
+  "apiName": "signalUsesStrategy",
+  "displayName": "入选用哪一版做法",
+  "description": "买入入选属于一版做法。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Signal",
+    "apiName": "strategy",
+    "displayName": "做法"
+  },
+  "target": {
+    "objectType": "Strategy",
+    "apiName": "signals",
+    "displayName": "买入入选"
+  }
+}

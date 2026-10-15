@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palantir-ontology-study.local/schema/object-type.schema.json",
+  "title": "Object type",
+  "description": "Schema definition of a real-world entity or event. Metadata matches Ontology Manager object type metadata; backing datasource, index status, and writeback are omitted as Foundry platform concerns.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "rid",
+    "apiName",
+    "displayName",
+    "pluralDisplayName",
+    "status",
+    "visibility",
+    "primaryKey",
+    "titleKey",
+    "properties"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "$ref": "common.schema.json#/$defs/resourceId"
+    },
+    "rid": {
+      "$ref": "common.schema.json#/$defs/rid"
+    },
+    "apiName": {
+      "$ref": "common.schema.json#/$defs/objectTypeApiName"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Singular name shown in user applications."
+    },
+    "pluralDisplayName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Plural name shown when viewing multiple objects."
+    },
+    "description": { "type": "string" },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Extra search terms in Ontology Manager / Object Explorer."
+    },
+    "groups": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Object type group labels."
+    },
+    "icon": {
+      "$ref": "common.schema.json#/$defs/icon"
+    },
+    "status": {
+      "$ref": "common.schema.json#/$defs/status"
+    },
+    "visibility": {
+      "$ref": "common.schema.json#/$defs/visibility"
+    },
+    "primaryKey": {
+      "$ref": "common.schema.json#/$defs/propertyApiName",
+      "description": "Single property that uniquely identifies each object. Must exist in properties and be a valid primary-key base type."
+    },
+    "titleKey": {
+      "$ref": "common.schema.json#/$defs/propertyApiName",
+      "description": "Property used as the display name for objects of this type."
+    },
+    "implements": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Interface API names this object type implements."
+    },
+    "properties": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "common.schema.json#/$defs/propertyDefinition"
+      },
+      "description": "Map of property API name to property definition. Keys must match each property's apiName."
+    },
+    "deprecation": {
+      "$ref": "common.schema.json#/$defs/deprecation"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "apiName": "excludesStock",
+  "displayName": "做法不买哪只",
+  "description": "黑名单。",
+  "cardinality": "many-to-many",
+  "source": {
+    "objectType": "Strategy",
+    "apiName": "excludedStocks",
+    "displayName": "黑名单"
+  },
+  "target": {
+    "objectType": "Stock",
+    "apiName": "excludedBy",
+    "displayName": "排除这只的做法"
+  }
+}

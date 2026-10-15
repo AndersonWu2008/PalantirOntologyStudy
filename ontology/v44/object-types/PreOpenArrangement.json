@@ -1,0 +1,516 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "pre-open-arrangement",
+  "rid": "ri.ontology.study.object-type.pre-open-arrangement",
+  "apiName": "PreOpenArrangement",
+  "displayName": "开盘安排",
+  "pluralDisplayName": "开盘安排",
+  "description": "一个账户、一个交易日、一次交出的那一页。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "file-text",
+    "color": "#1677ff"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "arrangementId",
+  "titleKey": "arrangementId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "arrangementId": {
+      "id": "arrangement-id",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.arrangement-id",
+      "apiName": "arrangementId",
+      "displayName": "安排身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "accountId": {
+      "id": "account-id",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.account-id",
+      "apiName": "accountId",
+      "displayName": "账户",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "sessionDate": {
+      "id": "session-date",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.session-date",
+      "apiName": "sessionDate",
+      "displayName": "交易日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "date"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "strategyId": {
+      "id": "strategy-id",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.strategy-id",
+      "apiName": "strategyId",
+      "displayName": "做法",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "supersedesArrangementId": {
+      "id": "supersedes-arrangement-id",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.supersedes-arrangement-id",
+      "apiName": "supersedesArrangementId",
+      "displayName": "作废的上一页",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "handedOverAt": {
+      "id": "handed-over-at",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.handed-over-at",
+      "apiName": "handedOverAt",
+      "displayName": "交出时间",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "timestamp"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "header": {
+      "id": "header",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.header",
+      "apiName": "header",
+      "displayName": "页首",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "HeaderSentence",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "headerAtConfirm": {
+      "id": "header-at-confirm",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.header-at-confirm",
+      "apiName": "headerAtConfirm",
+      "displayName": "确认当时的页首",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "HeaderSentence",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "totalAssetsShown": {
+      "id": "total-assets-shown",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.total-assets-shown",
+      "apiName": "totalAssetsShown",
+      "displayName": "展示的总资产",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "totalAssetsAtConfirm": {
+      "id": "total-assets-at-confirm",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.total-assets-at-confirm",
+      "apiName": "totalAssetsAtConfirm",
+      "displayName": "确认当时的总资产",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "cashShown": {
+      "id": "cash-shown",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.cash-shown",
+      "apiName": "cashShown",
+      "displayName": "展示的可用资金",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "cashAtConfirm": {
+      "id": "cash-at-confirm",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.cash-at-confirm",
+      "apiName": "cashAtConfirm",
+      "displayName": "确认当时的可用资金",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "continueCount": {
+      "id": "continue-count",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.continue-count",
+      "apiName": "continueCount",
+      "displayName": "继续拿只数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "positionCountAgrees": {
+      "id": "position-count-agrees",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.position-count-agrees",
+      "apiName": "positionCountAgrees",
+      "displayName": "持仓只数对齐",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "playbookChanged": {
+      "id": "playbook-changed",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.playbook-changed",
+      "apiName": "playbookChanged",
+      "displayName": "做法换了",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "stopped": {
+      "id": "stopped",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.stopped",
+      "apiName": "stopped",
+      "displayName": "今天停止",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "nothingToSendAcknowledged": {
+      "id": "nothing-to-send-acknowledged",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.nothing-to-send-acknowledged",
+      "apiName": "nothingToSendAcknowledged",
+      "displayName": "确认今天没有要执行的",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sellConfirmedBy": {
+      "id": "sell-confirmed-by",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.sell-confirmed-by",
+      "apiName": "sellConfirmedBy",
+      "displayName": "谁确认了卖出",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sellConfirmedAt": {
+      "id": "sell-confirmed-at",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.sell-confirmed-at",
+      "apiName": "sellConfirmedAt",
+      "displayName": "何时确认了卖出",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "timestamp"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "buyConfirmedBy": {
+      "id": "buy-confirmed-by",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.buy-confirmed-by",
+      "apiName": "buyConfirmedBy",
+      "displayName": "谁确认了买入",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "buyConfirmedAt": {
+      "id": "buy-confirmed-at",
+      "rid": "ri.ontology.study.property.pre-open-arrangement.buy-confirmed-at",
+      "apiName": "buyConfirmedAt",
+      "displayName": "何时确认了买入",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "timestamp"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    }
+  }
+}

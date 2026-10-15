@@ -1,0 +1,133 @@
+{
+  "$schema": "../schema/object-type.schema.json",
+  "id": "price-bar",
+  "rid": "ri.ontology.study.object-type.price-bar",
+  "apiName": "PriceBar",
+  "displayName": "Price bar",
+  "pluralDisplayName": "Price bars",
+  "description": "One trading session of open, high, low, close, and volume for a stock.",
+  "groups": ["equities", "market-data"],
+  "icon": { "name": "bar-chart", "color": "#14b8a6" },
+  "status": "experimental",
+  "visibility": "normal",
+  "primaryKey": "barId",
+  "titleKey": "barId",
+  "properties": {
+    "barId": {
+      "id": "bar-id",
+      "rid": "ri.ontology.study.property.price-bar.bar-id",
+      "apiName": "barId",
+      "displayName": "Bar ID",
+      "description": "Composite key ticker:date, e.g. AAPL:2026-10-08.",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "date": {
+      "id": "date",
+      "rid": "ri.ontology.study.property.price-bar.date",
+      "apiName": "date",
+      "displayName": "Date",
+      "description": "Session date (exchange calendar).",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "date" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true
+      },
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": { "pattern": "date" }
+      }
+    },
+    "open": {
+      "id": "open",
+      "rid": "ri.ontology.study.property.price-bar.open",
+      "apiName": "open",
+      "displayName": "Open",
+      "description": "Session open price.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": true,
+      "renderHints": { "searchable": true, "sortable": true },
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": { "style": "currency", "currency": "USD", "useGrouping": true }
+      }
+    },
+    "high": {
+      "id": "high",
+      "rid": "ri.ontology.study.property.price-bar.high",
+      "apiName": "high",
+      "displayName": "High",
+      "description": "Session high price.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": true,
+      "renderHints": { "searchable": true, "sortable": true },
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": { "style": "currency", "currency": "USD", "useGrouping": true }
+      }
+    },
+    "low": {
+      "id": "low",
+      "rid": "ri.ontology.study.property.price-bar.low",
+      "apiName": "low",
+      "displayName": "Low",
+      "description": "Session low price.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": true,
+      "renderHints": { "searchable": true, "sortable": true },
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": { "style": "currency", "currency": "USD", "useGrouping": true }
+      }
+    },
+    "close": {
+      "id": "close",
+      "rid": "ri.ontology.study.property.price-bar.close",
+      "apiName": "close",
+      "displayName": "Close",
+      "description": "Session close price.",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "double" },
+      "required": true,
+      "renderHints": { "searchable": true, "sortable": true },
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": { "style": "currency", "currency": "USD", "useGrouping": true }
+      }
+    },
+    "volume": {
+      "id": "volume",
+      "rid": "ri.ontology.study.property.price-bar.volume",
+      "apiName": "volume",
+      "displayName": "Volume",
+      "description": "Session share volume.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "long" },
+      "required": true,
+      "renderHints": { "searchable": true, "sortable": true, "identifier": true },
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": { "useGrouping": true, "notation": "compact" }
+      }
+    }
+  }
+}

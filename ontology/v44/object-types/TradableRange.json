@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "tradable-range",
+  "rid": "ri.ontology.study.object-type.tradable-range",
+  "apiName": "TradableRange",
+  "displayName": "可买范围",
+  "pluralDisplayName": "可买范围",
+  "description": "广度、比较数和买入入选用的同一个范围。文档 25 里称作 Index。不另造打分池。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "appstore",
+    "color": "#13c2c2"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "indexId",
+  "titleKey": "displayName",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.tradable-range.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "indexId": {
+      "id": "index-id",
+      "rid": "ri.ontology.study.property.tradable-range.index-id",
+      "apiName": "indexId",
+      "displayName": "范围身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "displayName": {
+      "id": "display-name",
+      "rid": "ri.ontology.study.property.tradable-range.display-name",
+      "apiName": "displayName",
+      "displayName": "范围名称",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    }
+  }
+}

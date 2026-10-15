@@ -1,0 +1,16 @@
+{
+  "apiName": "fromSellLine",
+  "displayName": "卖出委托来自哪一行",
+  "description": "一笔卖出委托来自一行卖出安排。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "SellOrder",
+    "apiName": "sellLine",
+    "displayName": "卖出安排"
+  },
+  "target": {
+    "objectType": "SellLine",
+    "apiName": "orders",
+    "displayName": "卖出委托"
+  }
+}

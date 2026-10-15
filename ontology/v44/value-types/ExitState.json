@@ -1,0 +1,21 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "exit-state",
+  "rid": "ri.ontology.study.value-type.exit-state",
+  "apiName": "ExitState",
+  "displayName": "退出结论",
+  "description": "这只持仓这一日的退出结论。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "继续拿",
+        "缺少",
+        "已写入卖出行"
+      ]
+    }
+  ]
+}

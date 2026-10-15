@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schema/shared-property.schema.json",
+  "id": "domain",
+  "rid": "ri.ontology.study.shared-property.domain",
+  "apiName": "domain",
+  "displayName": "域",
+  "description": "每个对象都有的共享属性，用来按领域过滤。当前交易域是 StockTrading。",
+  "status": "experimental",
+  "visibility": "normal",
+  "baseType": {
+    "type": "string"
+  },
+  "valueType": "Domain",
+  "typeClasses": [
+    {
+      "kind": "write",
+      "name": "identity"
+    }
+  ],
+  "renderHints": {
+    "searchable": true,
+    "sortable": true,
+    "selectable": true,
+    "lowCardinality": true
+  }
+}

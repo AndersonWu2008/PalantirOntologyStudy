@@ -1,0 +1,135 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "stock",
+  "rid": "ri.ontology.study.object-type.stock",
+  "apiName": "Stock",
+  "displayName": "股票",
+  "pluralDisplayName": "股票",
+  "description": "一只沪深 A 股。代码是身份。板块和是否 ST 来自证券资料同步。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "line-chart",
+    "color": "#faad14"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "ticker",
+  "titleKey": "displayName",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.stock.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.stock.ticker",
+      "apiName": "ticker",
+      "displayName": "代码",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "description": "例如 600036.SH。"
+    },
+    "displayName": {
+      "id": "display-name",
+      "rid": "ri.ontology.study.property.stock.display-name",
+      "apiName": "displayName",
+      "displayName": "简称",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "security"
+        }
+      ]
+    },
+    "isSt": {
+      "id": "is-st",
+      "rid": "ri.ontology.study.property.stock.is-st",
+      "apiName": "isSt",
+      "displayName": "是否 ST",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "security"
+        }
+      ]
+    },
+    "board": {
+      "id": "board",
+      "rid": "ri.ontology.study.property.stock.board",
+      "apiName": "board",
+      "displayName": "板块",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "主板或创业板。其他板块留空。",
+      "valueType": "Board",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "security"
+        }
+      ]
+    }
+  }
+}

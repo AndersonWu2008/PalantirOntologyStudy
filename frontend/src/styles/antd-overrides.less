@@ -1,0 +1,163 @@
+/**
+ * Ant Design 覆写 — 对齐 Indigo–Violet + action/capsule token
+ */
+
+// —— Table ——
+.ant-table {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary);
+}
+
+.ant-table-thead > tr > th {
+  background: var(--bg-subtle, var(--color-bg-container)) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  border-bottom-color: var(--border-color) !important;
+  height: var(--table-row-height, 40px);
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom-color: var(--border-color) !important;
+  height: var(--table-row-height, 40px);
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: var(--color-fill, var(--bg-hover)) !important;
+}
+
+.ant-table-tbody > tr.ant-table-row-selected > td,
+.ant-table-tbody > tr.foundry-row-active > td,
+.ant-table-tbody > tr.ds-row-writable > td {
+  background: var(--color-fill-secondary, var(--brand-muted)) !important;
+  box-shadow: inset 3px 0 0 0 var(--brand);
+}
+
+// —— Tag → 胶囊 ——
+.ant-tag {
+  display: inline-flex;
+  align-items: center;
+  height: var(--capsule-height, 24px);
+  margin-inline-end: 0;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--capsule-border, var(--border-color));
+  background: var(--capsule-bg);
+  color: var(--capsule-text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ant-tag-success,
+.ant-tag-green {
+  background: var(--action-green-muted, var(--capsule-success-bg)) !important;
+  border-color: transparent !important;
+  color: var(--action-green, var(--capsule-success-text)) !important;
+}
+
+.ant-tag-error,
+.ant-tag-red,
+.ant-tag-magenta {
+  background: var(--action-red-muted, var(--capsule-danger-bg)) !important;
+  border-color: transparent !important;
+  color: var(--action-red, var(--capsule-danger-text)) !important;
+}
+
+.ant-tag-warning,
+.ant-tag-gold,
+.ant-tag-orange {
+  background: var(--action-orange-muted, var(--capsule-warning-bg)) !important;
+  border-color: transparent !important;
+  color: var(--action-orange, var(--capsule-warning-text)) !important;
+}
+
+.ant-tag-processing,
+.ant-tag-blue,
+.ant-tag-cyan {
+  background: var(--action-blue-muted) !important;
+  border-color: transparent !important;
+  color: var(--action-blue) !important;
+}
+
+.ant-tag-purple {
+  background: var(--capsule-brand-bg) !important;
+  border-color: var(--capsule-brand-border) !important;
+  color: var(--capsule-brand-text) !important;
+}
+
+// —— Alert ——
+.ant-alert {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  border-left-width: 3px;
+  background: var(--bg-elevated);
+}
+
+.ant-alert-success {
+  background: var(--action-green-muted) !important;
+  border-color: transparent !important;
+  border-left-color: var(--action-green) !important;
+  color: var(--text-primary);
+
+  .ant-alert-message,
+  .ant-alert-icon {
+    color: var(--action-green) !important;
+  }
+}
+
+.ant-alert-info {
+  background: var(--action-blue-muted) !important;
+  border-color: transparent !important;
+  border-left-color: var(--action-blue) !important;
+
+  .ant-alert-message,
+  .ant-alert-icon {
+    color: var(--action-blue) !important;
+  }
+}
+
+.ant-alert-warning {
+  background: var(--action-orange-muted) !important;
+  border-color: transparent !important;
+  border-left-color: var(--action-orange) !important;
+
+  .ant-alert-message,
+  .ant-alert-icon {
+    color: var(--action-orange) !important;
+  }
+}
+
+.ant-alert-error {
+  background: var(--action-red-muted) !important;
+  border-color: transparent !important;
+  border-left-color: var(--action-red) !important;
+
+  .ant-alert-message,
+  .ant-alert-icon {
+    color: var(--action-red) !important;
+  }
+}
+
+// —— focus-visible ——
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.ant-btn:focus-visible,
+.ant-input:focus-visible,
+.ant-select-selector:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+
+// —— 可写 / 选中行（非 table 也可挂） ——
+.ds-row-writable,
+.foundry-row-active {
+  background: var(--color-fill-secondary, var(--brand-muted)) !important;
+  box-shadow: inset 3px 0 0 0 var(--brand);
+}
+
+.ds-capsule {
+  height: var(--capsule-height, 24px);
+}

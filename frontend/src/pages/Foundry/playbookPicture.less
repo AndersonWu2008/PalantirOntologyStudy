@@ -1,0 +1,86 @@
+.playbook {
+  margin: 4px 0 16px;
+}
+
+.playbook__ring,
+.playbook__flow,
+.playbook__aside,
+.playbook__hub-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.playbook__hub-row,
+.playbook__aside {
+  margin-top: 10px;
+}
+
+.playbook__node,
+.playbook__hub {
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.playbook__node {
+  min-width: 88px;
+}
+
+.playbook__hub {
+  min-width: 120px;
+}
+
+.playbook__node.is-on,
+.playbook__hub.is-on {
+  border-color: var(--brand);
+  background: var(--brand-muted);
+  color: var(--brand);
+}
+
+.playbook__node.is-here,
+.playbook__hub.is-here {
+  box-shadow: inset 0 0 0 2px var(--brand);
+}
+
+.playbook__arrow {
+  color: var(--text-secondary);
+}
+
+.playbook__line {
+  margin: 12px auto 0;
+  max-width: 640px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--brand);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.playbook__line p {
+  margin: 0;
+}
+
+.playbook__more-line {
+  margin-top: 8px;
+  color: var(--text-secondary);
+}
+
+.playbook__more {
+  margin-top: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+}
+
+.playbook__line a {
+  color: var(--brand);
+}

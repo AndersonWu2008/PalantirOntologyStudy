@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "board",
+  "rid": "ri.ontology.study.value-type.board",
+  "apiName": "Board",
+  "displayName": "板块",
+  "description": "沪深主板或创业板。其他板块不填。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "主板",
+        "创业板"
+      ]
+    }
+  ]
+}

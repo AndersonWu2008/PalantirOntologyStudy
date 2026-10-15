@@ -1,0 +1,28 @@
+{
+  "selector": {
+    "title": "Select from Database",
+    "searchPlaceholder": "Search by name, API name, or description...",
+    "selected": "{{count}} selected",
+    "confirm": "Add Selected",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "filters": "Filters",
+    "clearFilters": "Clear filters",
+    "noResults": "No matching results found",
+    "empty": "No data available",
+    "error": "Error loading data",
+    "totalItems": "{{total}} items",
+    "loading": "Loading...",
+    "rowsPerPage": "{{size}} rows per page"
+  },
+  "common": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "draft": "Draft",
+    "archived": "Archived",
+    "prominent": "Prominent",
+    "normal": "Normal",
+    "hidden": "Hidden"
+  }
+}

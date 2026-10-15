@@ -1,0 +1,6 @@
+[
+  { "source": "AAPL", "target": "AAPL:2026-10-07" },
+  { "source": "AAPL", "target": "AAPL:2026-10-08" },
+  { "source": "MSFT", "target": "MSFT:2026-10-07" },
+  { "source": "MSFT", "target": "MSFT:2026-10-08" }
+]

@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/value-type.schema.json",
+  "id": "iso-4217-currency",
+  "rid": "ri.ontology.study.value-type.iso-4217-currency",
+  "apiName": "Iso4217Currency",
+  "displayName": "ISO 4217 currency",
+  "description": "Three-letter currency code of a listing.",
+  "baseType": { "type": "string" },
+  "constraints": [
+    { "type": "regex", "pattern": "^[A-Z]{3}$" }
+  ]
+}

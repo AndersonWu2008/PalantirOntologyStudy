@@ -1,0 +1,16 @@
+{
+  "apiName": "sellLineOnArrangement",
+  "displayName": "卖出行在哪一页",
+  "description": "一行卖出属于一页安排。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "SellLine",
+    "apiName": "arrangement",
+    "displayName": "开盘安排"
+  },
+  "target": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "sellLines",
+    "displayName": "卖出安排"
+  }
+}

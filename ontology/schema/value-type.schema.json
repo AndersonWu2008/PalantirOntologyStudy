@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palantir-ontology-study.local/schema/value-type.schema.json",
+  "title": "Value type",
+  "description": "Semantic wrapper around a base type with optional constraints. Reusable on properties and shared properties.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "rid", "apiName", "displayName", "baseType"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "$ref": "common.schema.json#/$defs/resourceId" },
+    "rid": { "$ref": "common.schema.json#/$defs/rid" },
+    "apiName": { "$ref": "common.schema.json#/$defs/objectTypeApiName" },
+    "displayName": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "baseType": { "$ref": "common.schema.json#/$defs/baseType" },
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraint" }
+    }
+  },
+  "$defs": {
+    "constraint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "values"],
+          "properties": {
+            "type": { "const": "enum" },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": ["string", "number", "boolean"] }
+            },
+            "caseSensitive": { "type": "boolean" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "const": "range" },
+            "min": { "type": ["number", "string"] },
+            "max": { "type": ["number", "string"] }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "pattern"],
+          "properties": {
+            "type": { "const": "regex" },
+            "pattern": { "type": "string" },
+            "substring": { "type": "boolean" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["rid", "uuid"] }
+          }
+        }
+      ]
+    }
+  }
+}

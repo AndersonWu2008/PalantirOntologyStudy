@@ -1,0 +1,66 @@
+.contour-layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contour-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contour-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contour-main {
+  min-width: 0;
+}
+
+.contour-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contour-chart__row {
+  display: grid;
+  grid-template-columns: minmax(100px, 180px) 1fr 56px;
+  gap: 8px;
+  align-items: center;
+}
+
+.contour-chart__label {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.contour-chart__track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-fill-tertiary);
+  overflow: hidden;
+}
+
+.contour-chart__bar {
+  height: 100%;
+  background: var(--gradient-brand, var(--accent-primary));
+  border-radius: 999px;
+  box-shadow: var(--capsule-emphasis-shadow, none);
+}
+
+.contour-chart__value {
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  text-align: right;
+}

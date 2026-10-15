@@ -1,0 +1,224 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "sell-order",
+  "rid": "ri.ontology.study.object-type.sell-order",
+  "apiName": "SellOrder",
+  "displayName": "卖出委托",
+  "pluralDisplayName": "卖出委托",
+  "description": "已经写好内容、可供程序执行的一笔卖出。程序只回写受理号和执行状态。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "export",
+    "color": "#f5222d"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "orderId",
+  "titleKey": "orderId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.sell-order.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "orderId": {
+      "id": "order-id",
+      "rid": "ri.ontology.study.property.sell-order.order-id",
+      "apiName": "orderId",
+      "displayName": "委托身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "sellLineId": {
+      "id": "sell-line-id",
+      "rid": "ri.ontology.study.property.sell-order.sell-line-id",
+      "apiName": "sellLineId",
+      "displayName": "卖出行",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "quantity": {
+      "id": "quantity",
+      "rid": "ri.ontology.study.property.sell-order.quantity",
+      "apiName": "quantity",
+      "displayName": "股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitPrice": {
+      "id": "limit-price",
+      "rid": "ri.ontology.study.property.sell-order.limit-price",
+      "apiName": "limitPrice",
+      "displayName": "限价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "contentStatus": {
+      "id": "content-status",
+      "rid": "ri.ontology.study.property.sell-order.content-status",
+      "apiName": "contentStatus",
+      "displayName": "内容状态",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "OrderContentStatus",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "brokerOrderId": {
+      "id": "broker-order-id",
+      "rid": "ri.ontology.study.property.sell-order.broker-order-id",
+      "apiName": "brokerOrderId",
+      "displayName": "券商受理号",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "execution"
+        }
+      ]
+    },
+    "executionStatus": {
+      "id": "execution-status",
+      "rid": "ri.ontology.study.property.sell-order.execution-status",
+      "apiName": "executionStatus",
+      "displayName": "执行状态",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "ExecutionStatus",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "execution"
+        }
+      ]
+    },
+    "executionWrittenAt": {
+      "id": "execution-written-at",
+      "rid": "ri.ontology.study.property.sell-order.execution-written-at",
+      "apiName": "executionWrittenAt",
+      "displayName": "执行回写时间",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "timestamp"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "execution"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+.data-table {
+  .ant-table {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+  }
+
+  .ant-table-thead > tr > th {
+    background: var(--color-fill-secondary);
+    font-weight: 600;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ant-table-tbody > tr {
+    transition: all 0.2s;
+    background: var(--color-bg-elevated);
+
+    &:hover > td {
+      background: var(--color-fill-secondary) !important;
+    }
+
+    &.ant-table-row-selected {
+      background: var(--color-primary-light) !important;
+    }
+  }
+
+  .ant-table-tbody > tr:nth-child(odd) {
+    background: var(--color-bg-elevated);
+  }
+
+  .ant-table-tbody > tr:nth-child(odd):hover > td {
+    background: var(--color-fill-secondary) !important;
+  }
+
+  .ant-table-cell {
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .table-actions {
+    display: flex;
+    gap: 8px;
+  }
+}

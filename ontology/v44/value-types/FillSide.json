@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "fill-side",
+  "rid": "ri.ontology.study.value-type.fill-side",
+  "apiName": "FillSide",
+  "displayName": "成交方向",
+  "description": "成交回报是买入还是卖出。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "买入",
+        "卖出"
+      ]
+    }
+  ]
+}

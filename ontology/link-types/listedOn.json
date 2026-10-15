@@ -1,0 +1,16 @@
+{
+  "apiName": "listedOn",
+  "displayName": "Listed on",
+  "description": "A stock is listed on one exchange.",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Stock",
+    "apiName": "exchange",
+    "displayName": "Exchange"
+  },
+  "target": {
+    "objectType": "Exchange",
+    "apiName": "listings",
+    "displayName": "Listings"
+  }
+}

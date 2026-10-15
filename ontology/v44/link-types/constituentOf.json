@@ -1,0 +1,16 @@
+{
+  "apiName": "constituentOf",
+  "displayName": "在哪个可买范围里",
+  "description": "已公布的成分。",
+  "cardinality": "many-to-many",
+  "source": {
+    "objectType": "Stock",
+    "apiName": "ranges",
+    "displayName": "可买范围"
+  },
+  "target": {
+    "objectType": "TradableRange",
+    "apiName": "constituents",
+    "displayName": "成分"
+  }
+}

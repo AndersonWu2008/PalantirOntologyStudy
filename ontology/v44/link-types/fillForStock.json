@@ -1,0 +1,16 @@
+{
+  "apiName": "fillForStock",
+  "displayName": "成交是哪只股票",
+  "description": "一笔成交回报对应一只股票。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Fill",
+    "apiName": "stock",
+    "displayName": "股票"
+  },
+  "target": {
+    "objectType": "Stock",
+    "apiName": "fills",
+    "displayName": "成交回报"
+  }
+}

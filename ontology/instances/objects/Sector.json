@@ -1,0 +1,12 @@
+[
+  {
+    "sectorId": "technology",
+    "name": "Technology",
+    "gicsCode": "45"
+  },
+  {
+    "sectorId": "financials",
+    "name": "Financials",
+    "gicsCode": "40"
+  }
+]

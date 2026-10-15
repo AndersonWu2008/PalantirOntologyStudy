@@ -1,0 +1,16 @@
+{
+  "apiName": "inAccount",
+  "displayName": "持仓在哪个账户",
+  "description": "一笔持仓属于一个账户。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Position",
+    "apiName": "account",
+    "displayName": "账户"
+  },
+  "target": {
+    "objectType": "Account",
+    "apiName": "positions",
+    "displayName": "持仓"
+  }
+}

@@ -1,0 +1,61 @@
+.pipeline-graph {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.pipeline-node {
+  min-width: 140px;
+  max-width: 180px;
+  padding: 12px 14px;
+  text-align: left;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.pipeline-node:hover {
+  border-color: var(--brand, var(--color-primary));
+}
+
+.pipeline-node.is-active {
+  border-color: var(--brand, var(--color-primary));
+  background: var(--brand-muted, var(--color-primary-light));
+}
+
+.pipeline-node__kind {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.pipeline-node__title {
+  display: block;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.pipeline-node--input {
+  border-left: 3px solid var(--brand, var(--color-primary));
+}
+
+.pipeline-node--transform {
+  border-left: 3px solid var(--color-info, #2563eb);
+}
+
+.pipeline-node--output {
+  border-left: 3px solid var(--color-warning, #b45309);
+}
+
+.pipeline-arrow {
+  align-self: center;
+  color: var(--text-secondary);
+  font-size: 18px;
+  padding: 0 2px;
+}

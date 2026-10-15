@@ -1,0 +1,83 @@
+{
+  "$schema": "../schema/object-type.schema.json",
+  "id": "company",
+  "rid": "ri.ontology.study.object-type.company",
+  "apiName": "Company",
+  "displayName": "Company",
+  "pluralDisplayName": "Companies",
+  "description": "The legal issuer of a listed stock.",
+  "groups": ["equities"],
+  "icon": { "name": "apartment", "color": "#1890ff" },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "companyId",
+  "titleKey": "legalName",
+  "properties": {
+    "companyId": {
+      "id": "company-id",
+      "rid": "ri.ontology.study.property.company.company-id",
+      "apiName": "companyId",
+      "displayName": "Company ID",
+      "description": "Stable identifier, e.g. apple.",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "legalName": {
+      "id": "legal-name",
+      "rid": "ri.ontology.study.property.company.legal-name",
+      "apiName": "legalName",
+      "displayName": "Legal name",
+      "description": "Legal name of the issuer.",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "country": {
+      "id": "country",
+      "rid": "ri.ontology.study.property.company.country",
+      "apiName": "country",
+      "displayName": "Country",
+      "description": "ISO 3166-1 alpha-2 country of incorporation.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "sharedProperty": "country",
+      "valueType": "Iso3166Alpha2",
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      }
+    },
+    "foundedYear": {
+      "id": "founded-year",
+      "rid": "ri.ontology.study.property.company.founded-year",
+      "apiName": "foundedYear",
+      "displayName": "Founded year",
+      "description": "Year the company was founded.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "integer" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+/**
+ * Graph View Component Styles
+ * 使用 CSS 变量支持主题切换
+ */
+
+.graph-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+
+  .graph-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-bg-elevated);
+    border-bottom: 1px solid var(--color-border);
+
+    .ant-select {
+      .ant-select-selector {
+        background-color: var(--color-bg-container);
+        border-color: var(--color-border);
+        color: var(--color-text);
+      }
+    }
+
+    .ant-btn {
+      color: var(--color-text-secondary);
+
+      &:hover {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+      }
+    }
+  }
+
+  .graph-canvas {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-bg);
+
+    svg {
+      width: 100%;
+      height: 100%;
+
+      .edge {
+        line {
+          transition: stroke 0.2s;
+          stroke: var(--color-border);
+        }
+
+        text {
+          fill: var(--color-text-secondary);
+        }
+
+        &:hover line {
+          stroke: var(--color-primary);
+          stroke-width: 3;
+        }
+      }
+
+      .node {
+        transition: transform 0.2s;
+
+        &:hover {
+          transform: translate(var(--x), var(--y)) scale(1.1);
+        }
+
+        &.selected circle {
+          filter: drop-shadow(0 0 8px var(--color-primary-light));
+          stroke: var(--color-primary);
+        }
+
+        text {
+          fill: var(--color-text);
+        }
+      }
+    }
+  }
+
+  .graph-legend {
+    position: absolute;
+    bottom: var(--spacing-md);
+    left: var(--spacing-md);
+    width: 180px;
+
+    .ant-card {
+      background-color: var(--color-bg-elevated);
+      border-color: var(--color-border);
+
+      .ant-card-head {
+        background-color: var(--color-bg-elevated);
+        border-bottom-color: var(--color-border);
+        color: var(--color-text);
+      }
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-sm);
+
+      .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+      }
+
+      .legend-label {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+    }
+  }
+
+  .graph-node-details {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 240px;
+
+    .ant-card {
+      background-color: var(--color-bg-elevated);
+      border-color: var(--color-border);
+
+      .ant-card-head {
+        background-color: var(--color-bg-elevated);
+        border-bottom-color: var(--color-border);
+        color: var(--color-text);
+      }
+
+      .ant-typography {
+        color: var(--color-text);
+      }
+    }
+  }
+}

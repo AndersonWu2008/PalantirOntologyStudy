@@ -1,0 +1,16 @@
+{
+  "apiName": "fromBuyLine",
+  "displayName": "买入委托来自哪一行",
+  "description": "一笔买入委托来自一行买入安排。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "BuyOrder",
+    "apiName": "buyLine",
+    "displayName": "买入安排"
+  },
+  "target": {
+    "objectType": "BuyLine",
+    "apiName": "orders",
+    "displayName": "买入委托"
+  }
+}

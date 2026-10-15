@@ -1,0 +1,16 @@
+{
+  "apiName": "signalForStock",
+  "displayName": "入选哪只股票",
+  "description": "一只入选对应一只股票。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Signal",
+    "apiName": "stock",
+    "displayName": "股票"
+  },
+  "target": {
+    "objectType": "Stock",
+    "apiName": "signals",
+    "displayName": "买入入选"
+  }
+}

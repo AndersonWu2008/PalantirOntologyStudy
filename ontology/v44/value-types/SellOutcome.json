@@ -1,0 +1,27 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "sell-outcome",
+  "rid": "ri.ontology.study.value-type.sell-outcome",
+  "apiName": "SellOutcome",
+  "displayName": "卖出结果",
+  "description": "开盘之后这一行卖出变成怎样。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "可写入委托",
+        "挂涨停价",
+        "跌停今天不报",
+        "停牌今天不写入",
+        "今天卖不掉可卖是 0",
+        "卖掉可卖的其余今天卖不掉",
+        "今天先不卖你推迟了",
+        "已写入待执行",
+        "今天未写入"
+      ]
+    }
+  ]
+}

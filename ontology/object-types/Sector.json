@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema/object-type.schema.json",
+  "id": "sector",
+  "rid": "ri.ontology.study.object-type.sector",
+  "apiName": "Sector",
+  "displayName": "Sector",
+  "pluralDisplayName": "Sectors",
+  "description": "A GICS-style industry grouping a company belongs to.",
+  "groups": ["equities"],
+  "icon": { "name": "apartment", "color": "#722ed1" },
+  "status": "experimental",
+  "visibility": "normal",
+  "primaryKey": "sectorId",
+  "titleKey": "name",
+  "properties": {
+    "sectorId": {
+      "id": "sector-id",
+      "rid": "ri.ontology.study.property.sector.sector-id",
+      "apiName": "sectorId",
+      "displayName": "Sector ID",
+      "description": "Stable identifier, e.g. technology.",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "name": {
+      "id": "name",
+      "rid": "ri.ontology.study.property.sector.name",
+      "apiName": "name",
+      "displayName": "Name",
+      "description": "Display name, e.g. Technology.",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true
+      }
+    },
+    "gicsCode": {
+      "id": "gics-code",
+      "rid": "ri.ontology.study.property.sector.gics-code",
+      "apiName": "gicsCode",
+      "displayName": "GICS code",
+      "description": "GICS sector code (two digits).",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "valueType": "GicsSectorCode",
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true,
+        "identifier": true
+      }
+    }
+  }
+}

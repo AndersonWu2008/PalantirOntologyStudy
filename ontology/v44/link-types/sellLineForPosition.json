@@ -1,0 +1,16 @@
+{
+  "apiName": "sellLineForPosition",
+  "displayName": "卖的是哪笔持仓",
+  "description": "一行卖出指向一笔持仓。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "SellLine",
+    "apiName": "position",
+    "displayName": "持仓"
+  },
+  "target": {
+    "objectType": "Position",
+    "apiName": "sellLines",
+    "displayName": "卖出安排"
+  }
+}

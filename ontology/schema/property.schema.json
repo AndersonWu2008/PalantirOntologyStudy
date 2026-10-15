@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palantir-ontology-study.local/schema/property.schema.json",
+  "title": "Property",
+  "description": "Schema definition of a characteristic of an object type. Standalone file form of a property definition; object types also inline this shape under properties.",
+  "allOf": [
+    { "$ref": "common.schema.json#/$defs/propertyDefinition" }
+  ]
+}

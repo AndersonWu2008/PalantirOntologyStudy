@@ -1,0 +1,16 @@
+{
+  "apiName": "inSector",
+  "displayName": "In sector",
+  "description": "A company belongs to one sector.",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Company",
+    "apiName": "sector",
+    "displayName": "Sector"
+  },
+  "target": {
+    "objectType": "Sector",
+    "apiName": "companies",
+    "displayName": "Companies"
+  }
+}

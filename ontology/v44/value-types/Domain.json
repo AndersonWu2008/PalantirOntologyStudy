@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "domain",
+  "rid": "ri.ontology.study.value-type.domain",
+  "apiName": "Domain",
+  "displayName": "域",
+  "description": "对象属于哪一个领域。名称用 PascalCase。当前交易域是 StockTrading。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "regex",
+      "pattern": "^[A-Z][A-Za-z0-9]*$"
+    }
+  ]
+}

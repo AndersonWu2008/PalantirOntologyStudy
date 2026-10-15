@@ -1,0 +1,5 @@
+[
+  { "source": "AAPL", "target": "apple" },
+  { "source": "MSFT", "target": "microsoft" },
+  { "source": "JPM", "target": "jpmorgan" }
+]

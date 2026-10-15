@@ -1,0 +1,14 @@
+[
+  {
+    "mic": "XNAS",
+    "name": "NASDAQ",
+    "country": "US",
+    "timezone": "America/New_York"
+  },
+  {
+    "mic": "XNYS",
+    "name": "New York Stock Exchange",
+    "country": "US",
+    "timezone": "America/New_York"
+  }
+]

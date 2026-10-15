@@ -1,0 +1,8 @@
+---
+description: 前端新页只用 Indigo–Violet semantic CSS tokens，禁止再写品牌硬编码色。
+alwaysApply: true
+---
+
+# 前端 Semantic Tokens
+
+新页面与壳层样式只用 `themes/index.ts` / `applyThemeToCSS` 写出的语义变量（如 `--brand`、`--bg-canvas`、`--text-primary`、`--gradient-brand`、`--capsule-*`、`--action-*`）。状态/计数用 `.ds-capsule`；彩色按钮用 `.ds-btn--blue|green|yellow|orange|red|brown`（主 CTA 仍是蓝紫渐变）。禁止再写品牌相关 hex；图表涨跌等数据色除外。亮暗切换唯一入口：`themeStore`。

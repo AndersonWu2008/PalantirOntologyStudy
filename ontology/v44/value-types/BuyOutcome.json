@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "buy-outcome",
+  "rid": "ri.ontology.study.value-type.buy-outcome",
+  "apiName": "BuyOutcome",
+  "displayName": "买入结果",
+  "description": "开盘之后这一行买入变成怎样。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "可写入委托",
+        "今天不买开盘涨停",
+        "今天不买停牌",
+        "今天不买这个限价买不进",
+        "今天不买你否决了",
+        "今天不买已过 9:30",
+        "今天不买钱不够",
+        "今天不买超过约定只数",
+        "今天不买不在范围",
+        "今天不买不是整手",
+        "已写入待执行"
+      ]
+    }
+  ]
+}

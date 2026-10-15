@@ -1,0 +1,47 @@
+/**
+ * Data Card Styles
+ * Following Design System Guidelines
+ */
+
+.data-card {
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+  padding: var(--space-5);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  &-header {
+    margin-bottom: var(--space-3);
+  }
+
+  &-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  &-subtitle {
+    margin: var(--space-1) 0 0;
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+  }
+
+  &-content {
+    margin-bottom: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+  }
+
+  &-actions {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-color);
+  }
+}

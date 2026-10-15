@@ -1,0 +1,97 @@
+/**
+ * Data Explorer 内容区域样式
+ * 使用 CSS 变量支持主题切换
+ */
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  background-color: var(--color-bg);
+
+  .content-header {
+    margin-bottom: var(--spacing-lg);
+
+    .content-description {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+    }
+
+    .content-rid {
+      font-size: var(--font-size-sm);
+      font-family: var(--font-family-mono);
+      color: var(--color-text-tertiary);
+    }
+  }
+
+  .content-stats {
+    margin-bottom: var(--spacing-lg);
+
+    .ant-card {
+      background-color: var(--color-bg-elevated);
+      border-color: var(--color-border);
+
+      .ant-statistic-title {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+
+      .ant-statistic-content {
+        font-size: 24px;
+        color: var(--color-text);
+      }
+    }
+  }
+
+  .content-toolbar {
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .content-tabs {
+    flex: 1;
+
+    .ant-tabs-nav {
+      margin-bottom: var(--spacing-md);
+
+      .ant-tabs-tab {
+        color: var(--color-text-secondary);
+
+        &.ant-tabs-tab-active {
+          color: var(--color-primary);
+        }
+      }
+
+      .ant-tabs-ink-bar {
+        background-color: var(--color-primary);
+      }
+    }
+
+    .ant-tabs-content {
+      height: 100%;
+    }
+
+    .tab-content {
+      height: 100%;
+      min-height: 400px;
+    }
+  }
+}
+
+.content-area-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: var(--spacing-xl);
+  background-color: var(--color-bg);
+
+  .ant-empty-description {
+    color: var(--color-text-secondary);
+  }
+}

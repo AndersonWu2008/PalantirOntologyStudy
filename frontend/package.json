@@ -1,0 +1,36 @@
+{
+  "name": "ontology",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@monaco-editor/react": "^4.7.0",
+    "@tanstack/react-query": "^5.17.0",
+    "@tanstack/react-virtual": "^3.2.0",
+    "@xyflow/react": "^12.0.0",
+    "antd": "^5.12.0",
+    "axios": "^1.6.2",
+    "fuse.js": "^7.0.0",
+    "i18next": "^23.16.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.1.3",
+    "react-router-dom": "^6.21.0",
+    "reactflow": "^11.11.4",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "less": "^4.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  }
+}

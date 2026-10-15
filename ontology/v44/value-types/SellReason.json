@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "sell-reason",
+  "rid": "ri.ontology.study.value-type.sell-reason",
+  "apiName": "SellReason",
+  "displayName": "卖出原因",
+  "description": "卖出安排上的一句原因。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "止损",
+        "止盈",
+        "到期",
+        "制度离场"
+      ]
+    }
+  ]
+}

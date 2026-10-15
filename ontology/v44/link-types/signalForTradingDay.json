@@ -1,0 +1,16 @@
+{
+  "apiName": "signalForTradingDay",
+  "displayName": "入选在哪一天",
+  "description": "一只入选属于一个交易日。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Signal",
+    "apiName": "tradingDay",
+    "displayName": "交易日"
+  },
+  "target": {
+    "objectType": "TradingDay",
+    "apiName": "signals",
+    "displayName": "买入入选"
+  }
+}

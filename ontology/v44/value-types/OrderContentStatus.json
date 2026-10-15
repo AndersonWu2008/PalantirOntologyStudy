@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "order-content-status",
+  "rid": "ri.ontology.study.value-type.order-content-status",
+  "apiName": "OrderContentStatus",
+  "displayName": "委托内容状态",
+  "description": "委托内容是否待程序执行。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "待执行",
+        "不执行"
+      ]
+    }
+  ]
+}

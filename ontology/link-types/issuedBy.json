@@ -1,0 +1,16 @@
+{
+  "apiName": "issuedBy",
+  "displayName": "Issued by",
+  "description": "A stock is issued by one company.",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Stock",
+    "apiName": "issuer",
+    "displayName": "Issuer"
+  },
+  "target": {
+    "objectType": "Company",
+    "apiName": "issuedStocks",
+    "displayName": "Issued stocks"
+  }
+}

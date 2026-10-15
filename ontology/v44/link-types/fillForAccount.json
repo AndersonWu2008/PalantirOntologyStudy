@@ -1,0 +1,16 @@
+{
+  "apiName": "fillForAccount",
+  "displayName": "成交在哪一户",
+  "description": "一笔成交回报属于一个账户。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Fill",
+    "apiName": "account",
+    "displayName": "账户"
+  },
+  "target": {
+    "objectType": "Account",
+    "apiName": "fills",
+    "displayName": "成交回报"
+  }
+}

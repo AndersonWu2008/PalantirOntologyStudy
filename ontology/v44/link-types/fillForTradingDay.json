@@ -1,0 +1,16 @@
+{
+  "apiName": "fillForTradingDay",
+  "displayName": "成交在哪一天",
+  "description": "一笔成交回报属于一个交易日。日期就是这条链接，不另存一个可以对不上的日期。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Fill",
+    "apiName": "tradingDay",
+    "displayName": "交易日"
+  },
+  "target": {
+    "objectType": "TradingDay",
+    "apiName": "fills",
+    "displayName": "成交回报"
+  }
+}

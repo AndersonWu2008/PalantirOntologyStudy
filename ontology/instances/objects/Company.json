@@ -1,0 +1,20 @@
+[
+  {
+    "companyId": "apple",
+    "legalName": "Apple Inc.",
+    "country": "US",
+    "foundedYear": 1976
+  },
+  {
+    "companyId": "microsoft",
+    "legalName": "Microsoft Corporation",
+    "country": "US",
+    "foundedYear": 1975
+  },
+  {
+    "companyId": "jpmorgan",
+    "legalName": "JPMorgan Chase & Co.",
+    "country": "US",
+    "foundedYear": 1799
+  }
+]

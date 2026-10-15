@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/shared-property.schema.json",
+  "id": "country",
+  "rid": "ri.ontology.study.shared-property.country",
+  "apiName": "country",
+  "displayName": "Country",
+  "description": "ISO 3166-1 alpha-2 country code. Used on Company and Exchange.",
+  "status": "experimental",
+  "visibility": "normal",
+  "baseType": { "type": "string" },
+  "valueType": "Iso3166Alpha2",
+  "renderHints": {
+    "searchable": true,
+    "sortable": true,
+    "selectable": true,
+    "lowCardinality": true
+  }
+}

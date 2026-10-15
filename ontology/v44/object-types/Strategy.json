@@ -1,0 +1,1301 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "strategy",
+  "rid": "ri.ontology.study.object-type.strategy",
+  "apiName": "Strategy",
+  "displayName": "做法版本",
+  "pluralDisplayName": "做法版本",
+  "description": "一版参数。发布后不改这些数。换参数是新建一个对象。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "control",
+    "color": "#2f54eb"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "strategyId",
+  "titleKey": "displayName",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.strategy.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "strategyId": {
+      "id": "strategy-id",
+      "rid": "ri.ontology.study.property.strategy.strategy-id",
+      "apiName": "strategyId",
+      "displayName": "做法身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "packId": {
+      "id": "pack-id",
+      "rid": "ri.ontology.study.property.strategy.pack-id",
+      "apiName": "packId",
+      "displayName": "策略包",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "description": "v44Champion | v46Huimaqiang。管道按此分发 Function。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "displayName": {
+      "id": "display-name",
+      "rid": "ri.ontology.study.property.strategy.display-name",
+      "apiName": "displayName",
+      "displayName": "做法名称",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "universeIndexId": {
+      "id": "universe-index-id",
+      "rid": "ri.ontology.study.property.strategy.universe-index-id",
+      "apiName": "universeIndexId",
+      "displayName": "可买范围",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "exitOnRegimeFlip": {
+      "id": "exit-on-regime-flip",
+      "rid": "ri.ontology.study.property.strategy.exit-on-regime-flip",
+      "apiName": "exitOnRegimeFlip",
+      "displayName": "离开牛市和高波动时离场",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "breadthMin": {
+      "id": "breadth-min",
+      "rid": "ri.ontology.study.property.strategy.breadth-min",
+      "apiName": "breadthMin",
+      "displayName": "广度下限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "priceMin": {
+      "id": "price-min",
+      "rid": "ri.ontology.study.property.strategy.price-min",
+      "apiName": "priceMin",
+      "displayName": "价格下限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "priceMax": {
+      "id": "price-max",
+      "rid": "ri.ontology.study.property.strategy.price-max",
+      "apiName": "priceMax",
+      "displayName": "价格上限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitDownPercent": {
+      "id": "limit-down-percent",
+      "rid": "ri.ontology.study.property.strategy.limit-down-percent",
+      "apiName": "limitDownPercent",
+      "displayName": "跌停计数百分点",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitUpCountPercent": {
+      "id": "limit-up-count-percent",
+      "rid": "ri.ontology.study.property.strategy.limit-up-count-percent",
+      "apiName": "limitUpCountPercent",
+      "displayName": "涨停家数百分点",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "chinextLimitUpPercent": {
+      "id": "chinext-limit-up-percent",
+      "rid": "ri.ontology.study.property.strategy.chinext-limit-up-percent",
+      "apiName": "chinextLimitUpPercent",
+      "displayName": "创业板涨停计数百分点",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "mainLimitUpPercent": {
+      "id": "main-limit-up-percent",
+      "rid": "ri.ontology.study.property.strategy.main-limit-up-percent",
+      "apiName": "mainLimitUpPercent",
+      "displayName": "其余涨停计数百分点",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullStopLoss": {
+      "id": "bull-stop-loss",
+      "rid": "ri.ontology.study.property.strategy.bull-stop-loss",
+      "apiName": "bullStopLoss",
+      "displayName": "牛市固定止损比例",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullTrailingActivate": {
+      "id": "bull-trailing-activate",
+      "rid": "ri.ontology.study.property.strategy.bull-trailing-activate",
+      "apiName": "bullTrailingActivate",
+      "displayName": "牛市移动止盈激活",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullTrailingStop": {
+      "id": "bull-trailing-stop",
+      "rid": "ri.ontology.study.property.strategy.bull-trailing-stop",
+      "apiName": "bullTrailingStop",
+      "displayName": "牛市自高点回落",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullSinglePositionPct": {
+      "id": "bull-single-position-pct",
+      "rid": "ri.ontology.study.property.strategy.bull-single-position-pct",
+      "apiName": "bullSinglePositionPct",
+      "displayName": "牛市单只占比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullMinScore": {
+      "id": "bull-min-score",
+      "rid": "ri.ontology.study.property.strategy.bull-min-score",
+      "apiName": "bullMinScore",
+      "displayName": "牛市最低比较分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullAtrMultiple": {
+      "id": "bull-atr-multiple",
+      "rid": "ri.ontology.study.property.strategy.bull-atr-multiple",
+      "apiName": "bullAtrMultiple",
+      "displayName": "牛市 ATR 倍数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolStopLoss": {
+      "id": "high-vol-stop-loss",
+      "rid": "ri.ontology.study.property.strategy.high-vol-stop-loss",
+      "apiName": "highVolStopLoss",
+      "displayName": "高波动固定止损比例",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolTrailingActivate": {
+      "id": "high-vol-trailing-activate",
+      "rid": "ri.ontology.study.property.strategy.high-vol-trailing-activate",
+      "apiName": "highVolTrailingActivate",
+      "displayName": "高波动移动止盈激活",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolTrailingStop": {
+      "id": "high-vol-trailing-stop",
+      "rid": "ri.ontology.study.property.strategy.high-vol-trailing-stop",
+      "apiName": "highVolTrailingStop",
+      "displayName": "高波动自高点回落",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolSinglePositionPct": {
+      "id": "high-vol-single-position-pct",
+      "rid": "ri.ontology.study.property.strategy.high-vol-single-position-pct",
+      "apiName": "highVolSinglePositionPct",
+      "displayName": "高波动单只占比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolMinScore": {
+      "id": "high-vol-min-score",
+      "rid": "ri.ontology.study.property.strategy.high-vol-min-score",
+      "apiName": "highVolMinScore",
+      "displayName": "高波动最低比较分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolAtrMultiple": {
+      "id": "high-vol-atr-multiple",
+      "rid": "ri.ontology.study.property.strategy.high-vol-atr-multiple",
+      "apiName": "highVolAtrMultiple",
+      "displayName": "高波动 ATR 倍数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysStopLoss": {
+      "id": "sideways-stop-loss",
+      "rid": "ri.ontology.study.property.strategy.sideways-stop-loss",
+      "apiName": "sidewaysStopLoss",
+      "displayName": "震荡固定止损比例",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysTrailingActivate": {
+      "id": "sideways-trailing-activate",
+      "rid": "ri.ontology.study.property.strategy.sideways-trailing-activate",
+      "apiName": "sidewaysTrailingActivate",
+      "displayName": "震荡移动止盈激活",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysTrailingStop": {
+      "id": "sideways-trailing-stop",
+      "rid": "ri.ontology.study.property.strategy.sideways-trailing-stop",
+      "apiName": "sidewaysTrailingStop",
+      "displayName": "震荡自高点回落",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysSinglePositionPct": {
+      "id": "sideways-single-position-pct",
+      "rid": "ri.ontology.study.property.strategy.sideways-single-position-pct",
+      "apiName": "sidewaysSinglePositionPct",
+      "displayName": "震荡单只占比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysMinScore": {
+      "id": "sideways-min-score",
+      "rid": "ri.ontology.study.property.strategy.sideways-min-score",
+      "apiName": "sidewaysMinScore",
+      "displayName": "震荡最低比较分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysAtrMultiple": {
+      "id": "sideways-atr-multiple",
+      "rid": "ri.ontology.study.property.strategy.sideways-atr-multiple",
+      "apiName": "sidewaysAtrMultiple",
+      "displayName": "震荡 ATR 倍数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "adxBullMin": {
+      "id": "adx-bull-min",
+      "rid": "ri.ontology.study.property.strategy.adx-bull-min",
+      "apiName": "adxBullMin",
+      "displayName": "牛市趋势强度下限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "adxBearMin": {
+      "id": "adx-bear-min",
+      "rid": "ri.ontology.study.property.strategy.adx-bear-min",
+      "apiName": "adxBearMin",
+      "displayName": "熊市趋势强度下限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "risingRatioBull": {
+      "id": "rising-ratio-bull",
+      "rid": "ri.ontology.study.property.strategy.rising-ratio-bull",
+      "apiName": "risingRatioBull",
+      "displayName": "牛市上涨比例下限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "risingRatioBear": {
+      "id": "rising-ratio-bear",
+      "rid": "ri.ontology.study.property.strategy.rising-ratio-bear",
+      "apiName": "risingRatioBear",
+      "displayName": "熊市上涨比例上限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "volPercentileHigh": {
+      "id": "vol-percentile-high",
+      "rid": "ri.ontology.study.property.strategy.vol-percentile-high",
+      "apiName": "volPercentileHigh",
+      "displayName": "高波动分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitDownBearRatio": {
+      "id": "limit-down-bear-ratio",
+      "rid": "ri.ontology.study.property.strategy.limit-down-bear-ratio",
+      "apiName": "limitDownBearRatio",
+      "displayName": "跌停家数占比门槛",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "amountShrinkWarn": {
+      "id": "amount-shrink-warn",
+      "rid": "ri.ontology.study.property.strategy.amount-shrink-warn",
+      "apiName": "amountShrinkWarn",
+      "displayName": "缩量警告",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitUpOverheat": {
+      "id": "limit-up-overheat",
+      "rid": "ri.ontology.study.property.strategy.limit-up-overheat",
+      "apiName": "limitUpOverheat",
+      "displayName": "涨停过热",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitUpIce": {
+      "id": "limit-up-ice",
+      "rid": "ri.ontology.study.property.strategy.limit-up-ice",
+      "apiName": "limitUpIce",
+      "displayName": "涨停冰点",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "regimeMinPersistDays": {
+      "id": "regime-min-persist-days",
+      "rid": "ri.ontology.study.property.strategy.regime-min-persist-days",
+      "apiName": "regimeMinPersistDays",
+      "displayName": "制度连续天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "maxPerIndustry": {
+      "id": "max-per-industry",
+      "rid": "ri.ontology.study.property.strategy.max-per-industry",
+      "apiName": "maxPerIndustry",
+      "displayName": "每行业最多只数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "limitUpCountMin": {
+      "id": "limit-up-count-min",
+      "rid": "ri.ontology.study.property.strategy.limit-up-count-min",
+      "apiName": "limitUpCountMin",
+      "displayName": "涨停次数下限",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "consecutiveLimitDownDays": {
+      "id": "consecutive-limit-down-days",
+      "rid": "ri.ontology.study.property.strategy.consecutive-limit-down-days",
+      "apiName": "consecutiveLimitDownDays",
+      "displayName": "连续跌停天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullMaxHoldDays": {
+      "id": "bull-max-hold-days",
+      "rid": "ri.ontology.study.property.strategy.bull-max-hold-days",
+      "apiName": "bullMaxHoldDays",
+      "displayName": "牛市最长持有天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bullMaxPositions": {
+      "id": "bull-max-positions",
+      "rid": "ri.ontology.study.property.strategy.bull-max-positions",
+      "apiName": "bullMaxPositions",
+      "displayName": "牛市最多只数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolMaxHoldDays": {
+      "id": "high-vol-max-hold-days",
+      "rid": "ri.ontology.study.property.strategy.high-vol-max-hold-days",
+      "apiName": "highVolMaxHoldDays",
+      "displayName": "高波动最长持有天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "highVolMaxPositions": {
+      "id": "high-vol-max-positions",
+      "rid": "ri.ontology.study.property.strategy.high-vol-max-positions",
+      "apiName": "highVolMaxPositions",
+      "displayName": "高波动最多只数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysMaxHoldDays": {
+      "id": "sideways-max-hold-days",
+      "rid": "ri.ontology.study.property.strategy.sideways-max-hold-days",
+      "apiName": "sidewaysMaxHoldDays",
+      "displayName": "震荡最长持有天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "sidewaysMaxPositions": {
+      "id": "sideways-max-positions",
+      "rid": "ri.ontology.study.property.strategy.sideways-max-positions",
+      "apiName": "sidewaysMaxPositions",
+      "displayName": "震荡最多只数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "bearMaxPositions": {
+      "id": "bear-max-positions",
+      "rid": "ri.ontology.study.property.strategy.bear-max-positions",
+      "apiName": "bearMaxPositions",
+      "displayName": "熊市最多只数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "maShort": {
+      "id": "ma-short",
+      "rid": "ri.ontology.study.property.strategy.ma-short",
+      "apiName": "maShort",
+      "displayName": "短均线",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "maMid": {
+      "id": "ma-mid",
+      "rid": "ri.ontology.study.property.strategy.ma-mid",
+      "apiName": "maMid",
+      "displayName": "中均线",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "maLong": {
+      "id": "ma-long",
+      "rid": "ri.ontology.study.property.strategy.ma-long",
+      "apiName": "maLong",
+      "displayName": "长均线",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "volWindow": {
+      "id": "vol-window",
+      "rid": "ri.ontology.study.property.strategy.vol-window",
+      "apiName": "volWindow",
+      "displayName": "波动率窗口",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "amountMaWindow": {
+      "id": "amount-ma-window",
+      "rid": "ri.ontology.study.property.strategy.amount-ma-window",
+      "apiName": "amountMaWindow",
+      "displayName": "成交额均线",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "minHistoryDays": {
+      "id": "min-history-days",
+      "rid": "ri.ontology.study.property.strategy.min-history-days",
+      "apiName": "minHistoryDays",
+      "displayName": "最少历史天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "indexLookback": {
+      "id": "index-lookback",
+      "rid": "ri.ontology.study.property.strategy.index-lookback",
+      "apiName": "indexLookback",
+      "displayName": "指数回看天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    }
+  }
+}

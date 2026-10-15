@@ -1,0 +1,16 @@
+{
+  "apiName": "forAccount",
+  "displayName": "安排属于哪个账户",
+  "description": "一页安排交给一个账户。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "account",
+    "displayName": "账户"
+  },
+  "target": {
+    "objectType": "Account",
+    "apiName": "arrangements",
+    "displayName": "开盘安排"
+  }
+}

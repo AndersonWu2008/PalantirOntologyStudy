@@ -1,0 +1,21 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "entry-gate",
+  "rid": "ri.ontology.study.value-type.entry-gate",
+  "apiName": "EntryGate",
+  "displayName": "开仓门",
+  "description": "明天许不许开新仓。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "允许",
+        "关闭",
+        "缺少"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "header-sentence",
+  "rid": "ri.ontology.study.value-type.header-sentence",
+  "apiName": "HeaderSentence",
+  "displayName": "页首句子",
+  "description": "开盘安排页首允许出现的句子。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "还没写下委托",
+        "等开盘价",
+        "和券商对不上",
+        "没做完",
+        "这份已作废",
+        "做法不对",
+        "互相矛盾",
+        "持仓只数对不上",
+        "今天停止",
+        "委托已写下、待程序执行",
+        "程序已提交执行",
+        "今天没有要执行的"
+      ]
+    }
+  ]
+}

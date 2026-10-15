@@ -1,0 +1,15 @@
+{
+  "apiName": "stockOntology",
+  "displayName": "Stock ontology",
+  "description": "Study ontology for listed equities: companies, stocks, exchanges, sectors, and daily price bars.",
+  "objectTypes": ["Sector", "Exchange", "Company", "Stock", "PriceBar"],
+  "linkTypes": ["inSector", "issuedBy", "listedOn", "hasPriceBar"],
+  "sharedProperties": ["country"],
+  "valueTypes": [
+    "Iso3166Alpha2",
+    "Iso4217Currency",
+    "Mic",
+    "GicsSectorCode",
+    "ListingStatus"
+  ]
+}

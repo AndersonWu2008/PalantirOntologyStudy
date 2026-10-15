@@ -1,0 +1,417 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "trading-day",
+  "rid": "ri.ontology.study.object-type.trading-day",
+  "apiName": "TradingDay",
+  "displayName": "交易日",
+  "pluralDisplayName": "交易日",
+  "description": "交易所日历上的一天，以及这一天由池内行情算出的等权指数、广度和制度。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "calendar",
+    "color": "#52c41a"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "sessionDate",
+  "titleKey": "sessionDate",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.trading-day.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "sessionDate": {
+      "id": "session-date",
+      "rid": "ri.ontology.study.property.trading-day.session-date",
+      "apiName": "sessionDate",
+      "displayName": "日期",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "date"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "calendar"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "isTradingDay": {
+      "id": "is-trading-day",
+      "rid": "ri.ontology.study.property.trading-day.is-trading-day",
+      "apiName": "isTradingDay",
+      "displayName": "是否交易日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "calendar"
+        }
+      ]
+    },
+    "indexClose": {
+      "id": "index-close",
+      "rid": "ri.ontology.study.property.trading-day.index-close",
+      "apiName": "indexClose",
+      "displayName": "等权指数收盘",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "indexVolume": {
+      "id": "index-volume",
+      "rid": "ri.ontology.study.property.trading-day.index-volume",
+      "apiName": "indexVolume",
+      "displayName": "等权均量",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "totalAmount": {
+      "id": "total-amount",
+      "rid": "ri.ontology.study.property.trading-day.total-amount",
+      "apiName": "totalAmount",
+      "displayName": "总成交额",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "breadth": {
+      "id": "breadth",
+      "rid": "ri.ontology.study.property.trading-day.breadth",
+      "apiName": "breadth",
+      "displayName": "广度",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "regime": {
+      "id": "regime",
+      "rid": "ri.ontology.study.property.trading-day.regime",
+      "apiName": "regime",
+      "displayName": "制度",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "RegimeLabel",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "bullHvStreak": {
+      "id": "bull-hv-streak",
+      "rid": "ri.ontology.study.property.trading-day.bull-hv-streak",
+      "apiName": "bullHvStreak",
+      "displayName": "牛市或高波动连续天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "entryGate": {
+      "id": "entry-gate",
+      "rid": "ri.ontology.study.property.trading-day.entry-gate",
+      "apiName": "entryGate",
+      "displayName": "开仓门",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "EntryGate",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "selectionMissing": {
+      "id": "selection-missing",
+      "rid": "ri.ontology.study.property.trading-day.selection-missing",
+      "apiName": "selectionMissing",
+      "displayName": "入选写不出来",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "limitUpRatio": {
+      "id": "limit-up-ratio",
+      "rid": "ri.ontology.study.property.trading-day.limit-up-ratio",
+      "apiName": "limitUpRatio",
+      "displayName": "涨停家数占比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "limitDownRatio": {
+      "id": "limit-down-ratio",
+      "rid": "ri.ontology.study.property.trading-day.limit-down-ratio",
+      "apiName": "limitDownRatio",
+      "displayName": "跌停家数占比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "adx": {
+      "id": "adx",
+      "rid": "ri.ontology.study.property.trading-day.adx",
+      "apiName": "adx",
+      "displayName": "趋势强度",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "risingRatio": {
+      "id": "rising-ratio",
+      "rid": "ri.ontology.study.property.trading-day.rising-ratio",
+      "apiName": "risingRatio",
+      "displayName": "上涨比例",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "volPercentile": {
+      "id": "vol-percentile",
+      "rid": "ri.ontology.study.property.trading-day.vol-percentile",
+      "apiName": "volPercentile",
+      "displayName": "波动率分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "amountDeviation": {
+      "id": "amount-deviation",
+      "rid": "ri.ontology.study.property.trading-day.amount-deviation",
+      "apiName": "amountDeviation",
+      "displayName": "成交额偏离",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    }
+  }
+}

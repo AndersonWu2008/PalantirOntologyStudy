@@ -1,0 +1,16 @@
+{
+  "apiName": "usesStrategy",
+  "displayName": "安排按哪一版做法",
+  "description": "一页安排声明自己用的做法版本。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "strategy",
+    "displayName": "做法"
+  },
+  "target": {
+    "objectType": "Strategy",
+    "apiName": "arrangements",
+    "displayName": "开盘安排"
+  }
+}

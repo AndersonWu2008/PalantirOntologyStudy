@@ -1,0 +1,16 @@
+{
+  "apiName": "positionForStock",
+  "displayName": "持仓是哪只股票",
+  "description": "一笔持仓对应一只股票。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Position",
+    "apiName": "stock",
+    "displayName": "股票"
+  },
+  "target": {
+    "objectType": "Stock",
+    "apiName": "positions",
+    "displayName": "持仓"
+  }
+}

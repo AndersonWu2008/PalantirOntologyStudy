@@ -1,0 +1,16 @@
+{
+  "apiName": "barOnTradingDay",
+  "displayName": "行情在哪一天",
+  "description": "一条当日行情属于一个交易日。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "DailyBar",
+    "apiName": "tradingDay",
+    "displayName": "交易日"
+  },
+  "target": {
+    "objectType": "TradingDay",
+    "apiName": "dailyBars",
+    "displayName": "当日行情"
+  }
+}

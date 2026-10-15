@@ -1,0 +1,16 @@
+{
+  "apiName": "barForStock",
+  "displayName": "行情是哪只股票",
+  "description": "一条当日行情属于一只股票。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "DailyBar",
+    "apiName": "stock",
+    "displayName": "股票"
+  },
+  "target": {
+    "objectType": "Stock",
+    "apiName": "dailyBars",
+    "displayName": "当日行情"
+  }
+}

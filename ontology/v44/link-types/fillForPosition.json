@@ -1,0 +1,16 @@
+{
+  "apiName": "fillForPosition",
+  "displayName": "成交写进哪笔持仓",
+  "description": "成交可以在持仓出现之后补上这条链接。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "Fill",
+    "apiName": "position",
+    "displayName": "持仓"
+  },
+  "target": {
+    "objectType": "Position",
+    "apiName": "fills",
+    "displayName": "成交回报"
+  }
+}

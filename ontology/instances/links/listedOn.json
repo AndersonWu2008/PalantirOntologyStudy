@@ -1,0 +1,5 @@
+[
+  { "source": "AAPL", "target": "XNAS" },
+  { "source": "MSFT", "target": "XNAS" },
+  { "source": "JPM", "target": "XNYS" }
+]

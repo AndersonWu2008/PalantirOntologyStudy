@@ -1,0 +1,23 @@
+[
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc.",
+    "currency": "USD",
+    "sharesOutstanding": 15100000000,
+    "listingStatus": "active"
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corporation",
+    "currency": "USD",
+    "sharesOutstanding": 7430000000,
+    "listingStatus": "active"
+  },
+  {
+    "ticker": "JPM",
+    "name": "JPMorgan Chase & Co.",
+    "currency": "USD",
+    "sharesOutstanding": 2800000000,
+    "listingStatus": "active"
+  }
+]

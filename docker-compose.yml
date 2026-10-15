@@ -1,0 +1,21 @@
+services:
+  stock_ontology:
+    image: postgres:16-alpine
+    container_name: stock_ontology
+    environment:
+      POSTGRES_USER: ontology
+      POSTGRES_PASSWORD: ontology_dev
+      POSTGRES_DB: stock_ontology
+    ports:
+      - "5436:5432"
+    volumes:
+      - stock_ontology_data:/var/lib/postgresql/data
+      - ./database-api/sql/001_schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ontology -d stock_ontology"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  stock_ontology_data:

@@ -1,0 +1,28 @@
+{
+  "selector": {
+    "title": "从数据库选择",
+    "searchPlaceholder": "搜索名称、API名称或描述...",
+    "selected": "已选择 {{count}} 项",
+    "confirm": "添加选中 ({{count}})",
+    "cancel": "取消",
+    "clear": "清空",
+    "refresh": "刷新",
+    "filters": "筛选",
+    "clearFilters": "清除筛选",
+    "noResults": "未找到匹配结果",
+    "empty": "暂无数据",
+    "error": "加载数据出错",
+    "totalItems": "共 {{total}} 项",
+    "loading": "加载中...",
+    "rowsPerPage": "每页 {{size}} 行"
+  },
+  "common": {
+    "active": "活跃",
+    "inactive": "未激活",
+    "draft": "草稿",
+    "archived": "已归档",
+    "prominent": "突出",
+    "normal": "普通",
+    "hidden": "隐藏"
+  }
+}

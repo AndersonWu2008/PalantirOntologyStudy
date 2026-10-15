@@ -1,0 +1,16 @@
+{
+  "apiName": "forTradingDay",
+  "displayName": "安排用在哪一天",
+  "description": "一页安排用于一个交易日。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "tradingDay",
+    "displayName": "交易日"
+  },
+  "target": {
+    "objectType": "TradingDay",
+    "apiName": "arrangements",
+    "displayName": "开盘安排"
+  }
+}

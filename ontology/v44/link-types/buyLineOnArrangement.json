@@ -1,0 +1,16 @@
+{
+  "apiName": "buyLineOnArrangement",
+  "displayName": "买入行在哪一页",
+  "description": "一行买入属于一页安排。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "BuyLine",
+    "apiName": "arrangement",
+    "displayName": "开盘安排"
+  },
+  "target": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "buyLines",
+    "displayName": "买入安排"
+  }
+}

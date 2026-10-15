@@ -1,0 +1,106 @@
+{
+  "$schema": "../schema/object-type.schema.json",
+  "id": "stock",
+  "rid": "ri.ontology.study.object-type.stock",
+  "apiName": "Stock",
+  "displayName": "Stock",
+  "pluralDisplayName": "Stocks",
+  "description": "A listed equity identified by ticker, issued by one company and listed on one exchange.",
+  "aliases": ["equity", "listing"],
+  "groups": ["equities"],
+  "icon": { "name": "line-chart", "color": "#faad14" },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "ticker",
+  "titleKey": "ticker",
+  "properties": {
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.stock.ticker",
+      "apiName": "ticker",
+      "displayName": "Ticker",
+      "description": "Listing ticker symbol, e.g. AAPL.",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "identifier": true
+      }
+    },
+    "name": {
+      "id": "name",
+      "rid": "ri.ontology.study.property.stock.name",
+      "apiName": "name",
+      "displayName": "Name",
+      "description": "Security short name.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "currency": {
+      "id": "currency",
+      "rid": "ri.ontology.study.property.stock.currency",
+      "apiName": "currency",
+      "displayName": "Currency",
+      "description": "ISO 4217 currency of the listing.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "valueType": "Iso4217Currency",
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      }
+    },
+    "sharesOutstanding": {
+      "id": "shares-outstanding",
+      "rid": "ri.ontology.study.property.stock.shares-outstanding",
+      "apiName": "sharesOutstanding",
+      "displayName": "Shares outstanding",
+      "description": "Shares outstanding (approximate, for study data).",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "long" },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": { "useGrouping": true, "notation": "compact" }
+      }
+    },
+    "listingStatus": {
+      "id": "listing-status",
+      "rid": "ri.ontology.study.property.stock.listing-status",
+      "apiName": "listingStatus",
+      "displayName": "Listing status",
+      "description": "active, delisted, or suspended.",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "string" },
+      "required": true,
+      "valueType": "ListingStatus",
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      }
+    }
+  }
+}

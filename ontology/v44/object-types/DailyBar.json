@@ -1,0 +1,851 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "daily-bar",
+  "rid": "ri.ontology.study.object-type.daily-bar",
+  "apiName": "DailyBar",
+  "displayName": "当日行情",
+  "pluralDisplayName": "当日行情",
+  "description": "一只股票一个交易日一行。开盘同步写开盘价，收盘同步写收盘和量，计算再写派生数。已经写下的价格不能改成另一个数。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "bar-chart",
+    "color": "#14b8a6"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "barId",
+  "titleKey": "barId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.daily-bar.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "barId": {
+      "id": "bar-id",
+      "rid": "ri.ontology.study.property.daily-bar.bar-id",
+      "apiName": "barId",
+      "displayName": "行情身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "description": "代码|交易日，例如 600036.SH|2026-10-09。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.daily-bar.ticker",
+      "apiName": "ticker",
+      "displayName": "代码",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "sessionDate": {
+      "id": "session-date",
+      "rid": "ri.ontology.study.property.daily-bar.session-date",
+      "apiName": "sessionDate",
+      "displayName": "交易日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "date"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "open": {
+      "id": "open",
+      "rid": "ri.ontology.study.property.daily-bar.open",
+      "apiName": "open",
+      "displayName": "开盘价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "9:25 写入。已有值再送来不同的价则拒绝。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-open"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "high": {
+      "id": "high",
+      "rid": "ri.ontology.study.property.daily-bar.high",
+      "apiName": "high",
+      "displayName": "最高价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "low": {
+      "id": "low",
+      "rid": "ri.ontology.study.property.daily-bar.low",
+      "apiName": "low",
+      "displayName": "最低价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "close": {
+      "id": "close",
+      "rid": "ri.ontology.study.property.daily-bar.close",
+      "apiName": "close",
+      "displayName": "收盘价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "volume": {
+      "id": "volume",
+      "rid": "ri.ontology.study.property.daily-bar.volume",
+      "apiName": "volume",
+      "displayName": "成交量",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ]
+    },
+    "amount": {
+      "id": "amount",
+      "rid": "ri.ontology.study.property.daily-bar.amount",
+      "apiName": "amount",
+      "displayName": "成交额",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "changePercent": {
+      "id": "change-percent",
+      "rid": "ri.ontology.study.property.daily-bar.change-percent",
+      "apiName": "changePercent",
+      "displayName": "涨跌幅",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "材料里已经写明的百分点。不在这里用前收再除一遍。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ]
+    },
+    "previousClose": {
+      "id": "previous-close",
+      "rid": "ri.ontology.study.property.daily-bar.previous-close",
+      "apiName": "previousClose",
+      "displayName": "前收",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "suspended": {
+      "id": "suspended",
+      "rid": "ri.ontology.study.property.daily-bar.suspended",
+      "apiName": "suspended",
+      "displayName": "是否停牌",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "开盘同步只在空着时写入。收盘同步可以改，因为盘中可能停牌。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ]
+    },
+    "publishedIndustry": {
+      "id": "published-industry",
+      "rid": "ri.ontology.study.property.daily-bar.published-industry",
+      "apiName": "publishedIndustry",
+      "displayName": "当日行业标签",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "这一日资料上的原文。空着不覆盖已有标签。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "source-close"
+        }
+      ]
+    },
+    "limitUp": {
+      "id": "limit-up",
+      "rid": "ri.ontology.study.property.daily-bar.limit-up",
+      "apiName": "limitUp",
+      "displayName": "涨停价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "limitDown": {
+      "id": "limit-down",
+      "rid": "ri.ontology.study.property.daily-bar.limit-down",
+      "apiName": "limitDown",
+      "displayName": "跌停价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "ma20": {
+      "id": "ma-20",
+      "rid": "ri.ontology.study.property.daily-bar.ma-20",
+      "apiName": "ma20",
+      "displayName": "20 日均线",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "atr14": {
+      "id": "atr-14",
+      "rid": "ri.ontology.study.property.daily-bar.atr-14",
+      "apiName": "atr14",
+      "displayName": "14 日 ATR",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "volRatio": {
+      "id": "vol-ratio",
+      "rid": "ri.ontology.study.property.daily-bar.vol-ratio",
+      "apiName": "volRatio",
+      "displayName": "量比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "aboveMa20": {
+      "id": "above-ma-20",
+      "rid": "ri.ontology.study.property.daily-bar.above-ma-20",
+      "apiName": "aboveMa20",
+      "displayName": "收盘高于均线",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "f1": {
+      "id": "f-1",
+      "rid": "ri.ontology.study.property.daily-bar.f-1",
+      "apiName": "f1",
+      "displayName": "涨幅分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "f2": {
+      "id": "f-2",
+      "rid": "ri.ontology.study.property.daily-bar.f-2",
+      "apiName": "f2",
+      "displayName": "量价背离分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "f3": {
+      "id": "f-3",
+      "rid": "ri.ontology.study.property.daily-bar.f-3",
+      "apiName": "f3",
+      "displayName": "波动分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "f4": {
+      "id": "f-4",
+      "rid": "ri.ontology.study.property.daily-bar.f-4",
+      "apiName": "f4",
+      "displayName": "低换手分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "comparisonScore": {
+      "id": "comparison-score",
+      "rid": "ri.ontology.study.property.daily-bar.comparison-score",
+      "apiName": "comparisonScore",
+      "displayName": "比较数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "comparisonRank": {
+      "id": "comparison-rank",
+      "rid": "ri.ontology.study.property.daily-bar.comparison-rank",
+      "apiName": "comparisonRank",
+      "displayName": "比较数分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "limitUpCount120": {
+      "id": "limit-up-count-120",
+      "rid": "ri.ontology.study.property.daily-bar.limit-up-count-120",
+      "apiName": "limitUpCount120",
+      "displayName": "近 120 日涨停次数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "resolvedIndustryId": {
+      "id": "resolved-industry-id",
+      "rid": "ri.ontology.study.property.daily-bar.resolved-industry-id",
+      "apiName": "resolvedIndustryId",
+      "displayName": "供上限使用的行业",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "dayRet": {
+      "id": "day-ret",
+      "rid": "ri.ontology.study.property.daily-bar.day-ret",
+      "apiName": "dayRet",
+      "displayName": "日收益（小数）",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "isLimitUp": {
+      "id": "is-limit-up",
+      "rid": "ri.ontology.study.property.daily-bar.is-limit-up",
+      "apiName": "isLimitUp",
+      "displayName": "分板涨停",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "boolean" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "excluded": {
+      "id": "excluded",
+      "rid": "ri.ontology.study.property.daily-bar.excluded",
+      "apiName": "excluded",
+      "displayName": "池级剔除",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "boolean" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "luRecent20d": {
+      "id": "lu-recent-20d",
+      "rid": "ri.ontology.study.property.daily-bar.lu-recent-20d",
+      "apiName": "luRecent20d",
+      "displayName": "近20日涨停次数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "luCount60d": {
+      "id": "lu-count-60d",
+      "rid": "ri.ontology.study.property.daily-bar.lu-count-60d",
+      "apiName": "luCount60d",
+      "displayName": "近60日涨停次数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "high20d": {
+      "id": "high-20d",
+      "rid": "ri.ontology.study.property.daily-bar.high-20d",
+      "apiName": "high20d",
+      "displayName": "近20日最高收盘",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "ddFromHigh20": {
+      "id": "dd-from-high20",
+      "rid": "ri.ontology.study.property.daily-bar.dd-from-high20",
+      "apiName": "ddFromHigh20",
+      "displayName": "相对20日高点回撤",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "volMa5": {
+      "id": "vol-ma5",
+      "rid": "ri.ontology.study.property.daily-bar.vol-ma5",
+      "apiName": "volMa5",
+      "displayName": "5日均量",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "volMax20d": {
+      "id": "vol-max-20d",
+      "rid": "ri.ontology.study.property.daily-bar.vol-max-20d",
+      "apiName": "volMax20d",
+      "displayName": "20日最大量",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "volShrink": {
+      "id": "vol-shrink",
+      "rid": "ri.ontology.study.property.daily-bar.vol-shrink",
+      "apiName": "volShrink",
+      "displayName": "缩量比",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "scoreZj": {
+      "id": "score-zj",
+      "rid": "ri.ontology.study.property.daily-bar.score-zj",
+      "apiName": "scoreZj",
+      "displayName": "回马枪评分",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    },
+    "scoreZjRank": {
+      "id": "score-zj-rank",
+      "rid": "ri.ontology.study.property.daily-bar.score-zj-rank",
+      "apiName": "scoreZjRank",
+      "displayName": "回马枪评分分位",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": { "type": "double" },
+      "required": false,
+      "typeClasses": [{ "kind": "write", "name": "derived" }]
+    }
+  }
+}

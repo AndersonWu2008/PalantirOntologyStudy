@@ -1,0 +1,16 @@
+{
+  "apiName": "hasPriceBar",
+  "displayName": "Has price bar",
+  "description": "A stock has many daily price bars.",
+  "cardinality": "one-to-many",
+  "source": {
+    "objectType": "Stock",
+    "apiName": "priceBars",
+    "displayName": "Price bars"
+  },
+  "target": {
+    "objectType": "PriceBar",
+    "apiName": "stock",
+    "displayName": "Stock"
+  }
+}

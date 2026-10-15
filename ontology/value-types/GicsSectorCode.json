@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/value-type.schema.json",
+  "id": "gics-sector-code",
+  "rid": "ri.ontology.study.value-type.gics-sector-code",
+  "apiName": "GicsSectorCode",
+  "displayName": "GICS sector code",
+  "description": "Two-digit GICS sector code.",
+  "baseType": { "type": "string" },
+  "constraints": [
+    { "type": "regex", "pattern": "^[0-9]{2}$" }
+  ]
+}

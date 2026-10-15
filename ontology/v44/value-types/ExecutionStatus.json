@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "execution-status",
+  "rid": "ri.ontology.study.value-type.execution-status",
+  "apiName": "ExecutionStatus",
+  "displayName": "执行状态",
+  "description": "程序把委托送到券商之后的状态。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "未执行",
+        "已提交执行",
+        "已受理",
+        "被拒绝"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://palantir-ontology-study.local/schema/common.schema.json",
+  "title": "Palantir Ontology common types",
+  "description": "Shared definitions aligned with Foundry Ontology Manager metadata (object-link-types docs in old/02_pages_md).",
+  "$defs": {
+    "resourceId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Ontology Manager ID: lowercase letters, numbers, dashes; must start with a letter."
+    },
+    "propertyId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
+      "description": "Property ID: letters, numbers, dashes, underscores; must start with a letter."
+    },
+    "objectTypeApiName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Z][A-Za-z0-9]*$",
+      "description": "PascalCase API name unique across object types."
+    },
+    "propertyApiName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-z][A-Za-z0-9]*$",
+      "description": "camelCase API name unique within an object type."
+    },
+    "rid": {
+      "type": "string",
+      "pattern": "^ri\\.[a-z0-9.-]+\\.[a-z0-9.-]+\\.[a-z0-9.-]+\\.[A-Za-z0-9._-]+$",
+      "description": "Foundry resource identifier. Study RIDs use ri.ontology.study.<kind>.<id>."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["experimental", "active", "deprecated", "example", "promoted"],
+      "description": "promoted is object types only. New resources default to experimental."
+    },
+    "propertyStatus": {
+      "type": "string",
+      "enum": ["experimental", "active", "deprecated", "example"],
+      "description": "Property, shared property, and link type status. promoted is object types only."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["prominent", "normal", "hidden"],
+      "default": "normal"
+    },
+    "deprecation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "deadline"],
+      "properties": {
+        "reason": { "type": "string", "minLength": 1 },
+        "deadline": { "type": "string", "format": "date" },
+        "replacedBy": { "type": "string" }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "color"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        }
+      }
+    },
+    "primitiveBaseType": {
+      "type": "string",
+      "enum": [
+        "boolean",
+        "byte",
+        "short",
+        "integer",
+        "long",
+        "float",
+        "double",
+        "string",
+        "date",
+        "timestamp",
+        "geopoint",
+        "geoshape",
+        "vector",
+        "attachment",
+        "mediaReference",
+        "timeSeries",
+        "cipher",
+        "marking"
+      ],
+      "description": "Palantir property base types. Decimal, Map, and Binary are not valid Ontology base types."
+    },
+    "baseType": {
+      "description": "Property base type, including array and struct wrappers.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "$ref": "#/$defs/primitiveBaseType" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "items"],
+          "properties": {
+            "type": { "const": "array" },
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type"],
+              "properties": {
+                "type": { "$ref": "#/$defs/primitiveBaseType" }
+              }
+            },
+            "allowEmpty": {
+              "type": "boolean",
+              "default": false,
+              "description": "When required, whether an empty array is allowed."
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "fields"],
+          "properties": {
+            "type": { "const": "struct" },
+            "fields": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/structField" }
+            }
+          }
+        }
+      ]
+    },
+    "structField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["apiName", "displayName", "baseType"],
+      "properties": {
+        "apiName": { "$ref": "#/$defs/propertyApiName" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "baseType": { "$ref": "#/$defs/primitiveBaseType" },
+        "description": { "type": "string" }
+      }
+    },
+    "renderHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "searchable": { "type": "boolean", "default": true },
+        "sortable": { "type": "boolean", "default": false },
+        "selectable": { "type": "boolean", "default": false },
+        "lowCardinality": { "type": "boolean", "default": false },
+        "identifier": { "type": "boolean", "default": false },
+        "longText": { "type": "boolean", "default": false },
+        "keywords": { "type": "boolean", "default": false },
+        "disableFormatting": { "type": "boolean", "default": false },
+        "leadingWildcards": { "type": "boolean", "default": false },
+        "regexQueries": { "type": "boolean", "default": false }
+      }
+    },
+    "typeClass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "valueFormatting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["numeric", "dateTime", "userId", "resourceRid", "artifactGid"]
+        },
+        "numeric": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "style": {
+              "type": "string",
+              "enum": ["currency", "unit", "percentage", "prefixSuffix", "fixedValues"]
+            },
+            "currency": { "type": "string" },
+            "unit": { "type": "string" },
+            "prefix": { "type": "string" },
+            "suffix": { "type": "string" },
+            "useGrouping": { "type": "boolean" },
+            "notation": {
+              "type": "string",
+              "enum": ["standard", "compact", "scientific", "engineering"]
+            }
+          }
+        },
+        "dateTime": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "enum": [
+                "date",
+                "dateTimeLong",
+                "dateTimeShort",
+                "isoInstant",
+                "relativeToNow",
+                "time"
+              ]
+            },
+            "timeZone": { "type": "string" }
+          }
+        }
+      }
+    },
+    "propertyDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "rid",
+        "apiName",
+        "displayName",
+        "status",
+        "visibility",
+        "baseType"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/propertyId" },
+        "rid": { "$ref": "#/$defs/rid" },
+        "apiName": { "$ref": "#/$defs/propertyApiName" },
+        "displayName": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "status": { "$ref": "#/$defs/propertyStatus" },
+        "visibility": { "$ref": "#/$defs/visibility" },
+        "baseType": { "$ref": "#/$defs/baseType" },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, property values may not be null (Object Storage V2 semantics)."
+        },
+        "sharedProperty": {
+          "type": "string",
+          "description": "apiName of a shared property this property uses."
+        },
+        "valueType": {
+          "type": "string",
+          "description": "apiName of a value type wrapping this property."
+        },
+        "renderHints": { "$ref": "#/$defs/renderHints" },
+        "typeClasses": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/typeClass" }
+        },
+        "valueFormatting": { "$ref": "#/$defs/valueFormatting" },
+        "deprecation": { "$ref": "#/$defs/deprecation" }
+      }
+    }
+  }
+}

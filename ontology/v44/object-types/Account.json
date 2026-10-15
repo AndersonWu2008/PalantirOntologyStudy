@@ -1,0 +1,178 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "account",
+  "rid": "ri.ontology.study.object-type.account",
+  "apiName": "Account",
+  "displayName": "账户",
+  "pluralDisplayName": "账户",
+  "description": "券商账本上的现金和总资产。同步替换最新数，不在这里留历史。确认当时的数抄在开盘安排上。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "wallet",
+    "color": "#1677ff"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "accountId",
+  "titleKey": "displayName",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.account.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "accountId": {
+      "id": "account-id",
+      "rid": "ri.ontology.study.property.account.account-id",
+      "apiName": "accountId",
+      "displayName": "账户身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "displayName": {
+      "id": "display-name",
+      "rid": "ri.ontology.study.property.account.display-name",
+      "apiName": "displayName",
+      "displayName": "户名",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "availableCash": {
+      "id": "available-cash",
+      "rid": "ri.ontology.study.property.account.available-cash",
+      "apiName": "availableCash",
+      "displayName": "可用资金",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "账户同步每次替换。缺了不写成 0。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "snapshot"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "totalAssets": {
+      "id": "total-assets",
+      "rid": "ri.ontology.study.property.account.total-assets",
+      "apiName": "totalAssets",
+      "displayName": "总资产",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "snapshot"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "enabledStrategyId": {
+      "id": "enabled-strategy-id",
+      "rid": "ri.ontology.study.property.account.enabled-strategy-id",
+      "apiName": "enabledStrategyId",
+      "displayName": "启用的做法",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "只有启用一版做法时改。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    }
+  }
+}

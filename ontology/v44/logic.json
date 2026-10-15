@@ -1,0 +1,352 @@
+{
+  "functions": [
+    {
+      "apiName": "computeBarFeatures",
+      "displayName": "行情特征",
+      "reads": "范围内各只的源行情",
+      "writes": "ma20、atr14、volRatio、aboveMa20",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "buildMarketIndex",
+      "displayName": "等权指数",
+      "reads": "范围内当日收盘、量、额",
+      "writes": "交易日的指数三数。少于 10 只则三个都空",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "computeMarketBreadth",
+      "displayName": "广度",
+      "reads": "aboveMa20",
+      "writes": "breadth",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "detectRegime",
+      "displayName": "制度",
+      "reads": "指数序列、涨跌幅、做法上的门槛",
+      "writes": "regime、bullHvStreak、诊断。门槛缺或历史不足 60 日则 regime 空",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "computeComparisonScore",
+      "displayName": "比较数",
+      "reads": "当日特征与广度",
+      "writes": "f1 至 f4、comparisonScore、comparisonRank",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "countLimitUps120",
+      "displayName": "120 日涨停次数",
+      "reads": "涨跌幅、板块、做法上的百分点",
+      "writes": "limitUpCount120",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "resolveIndustry",
+      "displayName": "供上限使用的行业",
+      "reads": "该日及以前的 publishedIndustry",
+      "writes": "resolvedInIndustry",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "computeLimitPrices",
+      "displayName": "涨停价与跌停价",
+      "reads": "前收、板块",
+      "writes": "limitUp、limitDown",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "开盘管道 runOpenPipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "rollHoldingState",
+      "displayName": "持仓日更",
+      "reads": "当日最高价、上一交易日的最高价和天数",
+      "writes": "highSinceEntry、daysHeld。缺最高价则不改，并把该持仓的日更标为缺少",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "judgeEntryGate",
+      "displayName": "开仓门",
+      "reads": "广度、连续天数、制度",
+      "writes": "entryGate",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "selectV44Buys",
+      "displayName": "买入入选",
+      "reads": "开仓门、比较数、价格带、黑名单、行业、只数、总资产",
+      "writes": "Signal，或只把 selectionMissing 写成真",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "judgeV44Exits",
+      "displayName": "退出判定",
+      "reads": "入场字段、日更后的最高价和天数、收盘、制度",
+      "writes": "exitState、exitReason、exitJudgedOn",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "computeHuimaqiangFactors",
+      "displayName": "回马枪因子",
+      "reads": "收盘、量、板块、ST",
+      "writes": "dayRet、isLimitUp、excluded、luRecent20d、luCount60d、ddFromHigh20、volShrink…",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "pipeline/functions/huimaqiang.ts；Pack v46Huimaqiang。"
+    },
+    {
+      "apiName": "computeHuimaqiangScore",
+      "displayName": "回马枪评分",
+      "reads": "回马枪因子与池",
+      "writes": "scoreZj、scoreZjRank",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "pipeline/functions/huimaqiang.ts；对齐 deploy_v46_huimaqiang.build_v46_score。"
+    },
+    {
+      "apiName": "selectHuimaqiangBuys",
+      "displayName": "回马枪买入入选",
+      "reads": "开仓门、scoreZj、池价带、可买范围、只数",
+      "writes": "BuyLine 计划",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "pipeline/functions/huimaqiang.ts；入选限制在可买范围。"
+    },
+    {
+      "apiName": "judgeHuimaqiangExits",
+      "displayName": "回马枪退出判定",
+      "reads": "入场字段、袖套（ATR 倍必须 >0 才触发 ATR 止损）",
+      "writes": "exitState、exitReason",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "close-pipeline 共用退出顺序；V46 atrMultiple=0 不触发 ATR。"
+    },
+    {
+      "apiName": "writePlannedSellLines",
+      "displayName": "写成卖出行",
+      "reads": "exitState 为已写入卖出行的持仓",
+      "writes": "SellLine 的原因、计划股数、计划限价。缺少则不写行，页首没做完",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "writePlannedBuyLines",
+      "displayName": "抄上买入行",
+      "reads": "当日 Signal",
+      "writes": "BuyLine 的顺序、计划股数、计划限价。不重新排序",
+      "whyNotAction": "没有人提交。同一批行情再跑一次，得到同一组数。",
+      "code": "收盘管道 runClosePipeline 里计算。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "recordFill",
+      "displayName": "成交写回",
+      "reads": "Fill，以及该日 atr14、制度、最高价",
+      "writes": "持仓入场字段或股数。缺成交价、ATR 或制度则 entryFieldsMissing 为真",
+      "whyNotAction": "没有人提交。同一笔成交再跑一次，不写成两套入场价。",
+      "code": "recordFill 已是单独一次调用。成交管道 fillPipeline 只调用它。"
+    },
+    {
+      "apiName": "assemblePreOpenPage",
+      "displayName": "写成交易员这一页",
+      "reads": "安排、各行、selectionMissing 与退出缺少",
+      "writes": "页首和行上的实际股数、实际限价",
+      "whyNotAction": "没有人在选择这句。同一批输入再跑一次，得到同一页。",
+      "code": "收盘管道和开盘管道都会写这一页。页面上不能单独再跑一次。"
+    },
+    {
+      "apiName": "pageHeader",
+      "displayName": "页首该是哪一句",
+      "reads": "安排、各行 outcome、时钟、停止与作废",
+      "writes": "header",
+      "whyNotAction": "没有人在选择这句，是核对结果。",
+      "code": "页首句子写在收盘管道和开盘管道里。还不是名叫 pageHeader 的单独 Function。"
+    },
+    {
+      "apiName": "brokerAgrees",
+      "displayName": "和券商是否一致",
+      "reads": "账户可用资金、总资产的最近一次同步；各行 brokerSellable 与持仓上的源数字",
+      "writes": "不一致时 header 为对不上",
+      "whyNotAction": "同步失败或数字不一致就不可确认。不另存一份手填资金。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "positionCountAgrees",
+      "displayName": "持仓只数是否对齐",
+      "reads": "账户下持仓只数、卖出安排只数、continueCount",
+      "writes": "positionCountAgrees、continueCount",
+      "whyNotAction": "漏一只就整页不可确认。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "continueHoldings",
+      "displayName": "继续拿的名单",
+      "reads": "持仓减去已有卖出安排的那些",
+      "writes": "对象集，不落成属性",
+      "whyNotAction": "主路径只显示只数；点开才是这个对象集。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "lineAmount",
+      "displayName": "金额",
+      "reads": "限价、股数",
+      "writes": "amount",
+      "whyNotAction": "手填会和限价乘股数变成两本账。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "lineWeight",
+      "displayName": "占账户",
+      "reads": "金额、总资产",
+      "writes": "weight",
+      "whyNotAction": "手填会和限价乘股数变成两本账。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "sellLineOutcome",
+      "displayName": "开盘后卖出这一行变成怎样",
+      "reads": "原因、开盘价、涨停价、跌停价、券商可卖、是否停牌",
+      "writes": "outcome、submitQuantity、submitLimitPrice",
+      "whyNotAction": "跌停则今天不报。可卖改写是公式。比较数和退出判定不在本函数里。",
+      "code": "开盘管道里按这段定义写卖出行。还不是名叫 sellLineOutcome 的单独 Function。"
+    },
+    {
+      "apiName": "buyLineOutcome",
+      "displayName": "开盘后买入这一行变成怎样",
+      "reads": "开盘价、是否涨停、是否停牌、限价是否买得进、是否整手、是否在范围内、顺序、可用资金、只数与行业",
+      "writes": "outcome、submitQuantity",
+      "whyNotAction": "钱不够从第一行买不起处截断，不跳过。点不出超限的是哪一只时，改为整页没做完。",
+      "code": "开盘管道里按这段定义写买入行。还不是名叫 buyLineOutcome 的单独 Function。"
+    },
+    {
+      "apiName": "buyConfirmAllowed",
+      "displayName": "现在能不能写下买入委托",
+      "reads": "时钟是否在 9:25 至 9:30，页首是否可确认，是否还有未写入的止损或制度离场",
+      "writes": "真或假",
+      "whyNotAction": "这是提交条件，不是一次提交。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "sellConfirmAllowed",
+      "displayName": "现在能不能写下卖出委托",
+      "reads": "时钟是否在 9:25 至当日 15:00，页首是否可确认",
+      "writes": "真或假",
+      "whyNotAction": "15:00 之后未写入的卖出留在行上写成今天未写入，不改成继续拿。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "lineConflict",
+      "displayName": "同一只是否两句冲突",
+      "reads": "卖出安排、买入安排、继续拿名单",
+      "writes": "冲突则 header 为互相矛盾",
+      "whyNotAction": "不靠交易员眼看。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    },
+    {
+      "apiName": "alreadyHasOrder",
+      "displayName": "这一行是否已有待执行或已执行的委托",
+      "reads": "行是否已有委托链接",
+      "writes": "真或假",
+      "whyNotAction": "提交条件。为真则这条规则不再创建第二笔委托。",
+      "code": "定义在 01。还没有单独的一次调用。"
+    }
+  ],
+  "actionTypes": [
+    {
+      "apiName": "ConfirmSells",
+      "displayName": "确认卖出",
+      "who": "交易员",
+      "parameters": "这一页 PreOpenArrangement。卖出区的行由链接读出，不逐行手填股数和限价。",
+      "condition": "sellConfirmAllowed 为真。原因为止损或制度离场的行必须都能写入，且都没有被推迟。",
+      "rule": "function-backed。对 outcome 属于可写入委托、挂涨停价、卖掉可卖的其余今天卖不掉，且 postponed 为假、alreadyHasOrder 为假的每条 SellLine，创建 SellOrder，写入 quantity、limitPrice、contentStatus 为待执行，并链接 fromSellLine、forStock、forPosition、forAccount。抄下 outcomeAtConfirm、sellConfirmedBy、sellConfirmedAt、cashAtConfirm、totalAssetsAtConfirm、headerAtConfirm。不写 brokerOrderId，不改持仓股数。alreadyHasOrder 为真且 executionStatus 仍是未执行时，改为修改该委托的股数和限价。执行已经开始的，不改内容。跌停今天不报的行不创建委托。",
+      "functionBacked": true,
+      "code": "定义在 01。还不能提交。"
+    },
+    {
+      "apiName": "ConfirmBuys",
+      "displayName": "确认买入",
+      "who": "交易员",
+      "parameters": "这一页 PreOpenArrangement。",
+      "condition": "buyConfirmAllowed 为真，且不存在未写入委托的止损行或制度离场行。",
+      "rule": "function-backed。对 outcome 为可写入委托、未否决、alreadyHasOrder 为假的每条 BuyLine，创建 BuyOrder，写入股数、限价、contentStatus 为待执行，并链接 fromBuyLine、forStock、forAccount。抄下该行 outcomeAtConfirm 与页上的 buyConfirmedBy、buyConfirmedAt。已有且尚未执行的委托，只修改股数和限价。不改持仓股数。",
+      "functionBacked": true,
+      "code": "定义在 01。还不能提交。"
+    },
+    {
+      "apiName": "PostponeSellLine",
+      "displayName": "推迟这一行卖出",
+      "who": "交易员",
+      "parameters": "一条 SellLine。",
+      "condition": "reason 是止盈或到期。止损和制度离场不能推迟。",
+      "rule": "写下 postponed、outcomeAtConfirm。若已有 SellOrder 且 executionStatus 为未执行，把 contentStatus 改为不执行。不删除这行。continueCount 重算时不把它算进继续拿。",
+      "functionBacked": false,
+      "code": "定义在 01。还不能提交。"
+    },
+    {
+      "apiName": "VetoBuyLine",
+      "displayName": "否决这一行买入",
+      "who": "交易员",
+      "parameters": "一条 BuyLine。",
+      "condition": "该行尚未被程序执行。",
+      "rule": "写下 vetoed 与 outcomeAtConfirm。若已有尚未执行的 BuyOrder，把 contentStatus 改为不执行。不修改任何卖出委托。",
+      "functionBacked": false,
+      "code": "定义在 01。还不能提交。"
+    },
+    {
+      "apiName": "ReportFill",
+      "displayName": "回报成交",
+      "who": "交易员",
+      "parameters": "一笔待执行的 BuyOrder 或 SellOrder，以及人手从券商抄来的成交价、成交股数、成交日。",
+      "condition": "委托 contentStatus 为待执行；executionStatus 不是被拒绝。成交股数不超过委托股数。卖出不超过持仓可卖。",
+      "rule": "创建 Fill，链到账户、股票、交易日与持仓。买入时先按 book 增持仓股数，再调用 recordFill 写入入场价、入场日、入场 ATR、入场制度。卖出时按 book 减持仓股数，不改入场字段。把委托 executionStatus 写成已受理。不编造成交价。",
+      "functionBacked": true,
+      "code": "pipeline/actions.ts reportFill。可提交。"
+    },
+    {
+      "apiName": "AcknowledgeNothingToSend",
+      "displayName": "确认今天没有要执行的",
+      "who": "交易员",
+      "parameters": "这一页 PreOpenArrangement。",
+      "condition": "pageHeader 为今天没有要执行的。",
+      "rule": "写下 nothingToSendAcknowledged、确认人与时间。不创建委托。",
+      "functionBacked": false,
+      "code": "定义在 01。还不能提交。"
+    },
+    {
+      "apiName": "StopArrangement",
+      "displayName": "今天停止",
+      "who": "交易员",
+      "parameters": "这一页 PreOpenArrangement。",
+      "condition": "无额外公式。已停止再调用，规则不重复改写。",
+      "rule": "写下 stopped。之后 pageHeader 为今天停止，ConfirmSells 与 ConfirmBuys 的提交条件为假。尚未执行的委托把 contentStatus 改为不执行。不把持仓改写成继续拿或卖出。",
+      "functionBacked": false,
+      "code": "定义在 01。还不能提交。"
+    },
+    {
+      "apiName": "PublishStrategyVersion",
+      "displayName": "发布一版做法",
+      "who": "规定这版做法的人",
+      "parameters": "名称、13 与 18 列出的全部参数、用哪一个约定能买的范围、黑名单上的 Stock 对象集。",
+      "condition": "价格带、冠军参数和制度门槛都有值。缺一项则整次不发生。",
+      "rule": "创建一个 Strategy object，写下这些决策属性，链上 usesUniverse 与 excludesStock。不修改已有 Strategy。不启用它。",
+      "functionBacked": false,
+      "code": "定义在 25。还不能提交。"
+    },
+    {
+      "apiName": "EnableStrategy",
+      "displayName": "启用一版做法",
+      "who": "规定这版做法的人",
+      "parameters": "一个 Account，一个 Strategy。",
+      "condition": "该 Strategy 已存在。",
+      "rule": "把 enabledStrategy 改到这一版。不改任何一版里面的参数。不改已经交出的页。",
+      "functionBacked": false,
+      "code": "定义在 25。还不能提交。"
+    }
+  ]
+}

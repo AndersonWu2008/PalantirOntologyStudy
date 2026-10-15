@@ -1,0 +1,411 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "position",
+  "rid": "ri.ontology.study.object-type.position",
+  "apiName": "Position",
+  "displayName": "持仓",
+  "pluralDisplayName": "持仓",
+  "description": "一户里的一只持仓。股数由账户同步替换。入场字段只写一次。最高价和持有天数由日更改。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "container",
+    "color": "#eb2f96"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "positionId",
+  "titleKey": "positionId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.position.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "positionId": {
+      "id": "position-id",
+      "rid": "ri.ontology.study.property.position.position-id",
+      "apiName": "positionId",
+      "displayName": "持仓身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "accountId": {
+      "id": "account-id",
+      "rid": "ri.ontology.study.property.position.account-id",
+      "apiName": "accountId",
+      "displayName": "账户",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.position.ticker",
+      "apiName": "ticker",
+      "displayName": "代码",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "quantity": {
+      "id": "quantity",
+      "rid": "ri.ontology.study.property.position.quantity",
+      "apiName": "quantity",
+      "displayName": "持仓股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "snapshot"
+        }
+      ]
+    },
+    "sellableQuantity": {
+      "id": "sellable-quantity",
+      "rid": "ri.ontology.study.property.position.sellable-quantity",
+      "apiName": "sellableQuantity",
+      "displayName": "可卖股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "snapshot"
+        }
+      ]
+    },
+    "entryPrice": {
+      "id": "entry-price",
+      "rid": "ri.ontology.study.property.position.entry-price",
+      "apiName": "entryPrice",
+      "displayName": "入场价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "entryDate": {
+      "id": "entry-date",
+      "rid": "ri.ontology.study.property.position.entry-date",
+      "apiName": "entryDate",
+      "displayName": "入场日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "date"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "atrAtEntry": {
+      "id": "atr-at-entry",
+      "rid": "ri.ontology.study.property.position.atr-at-entry",
+      "apiName": "atrAtEntry",
+      "displayName": "入场日 ATR",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "regimeAtEntry": {
+      "id": "regime-at-entry",
+      "rid": "ri.ontology.study.property.position.regime-at-entry",
+      "apiName": "regimeAtEntry",
+      "displayName": "入场制度",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "RegimeLabel",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "highSinceEntry": {
+      "id": "high-since-entry",
+      "rid": "ri.ontology.study.property.position.high-since-entry",
+      "apiName": "highSinceEntry",
+      "displayName": "自入场最高价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "roll"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "daysHeld": {
+      "id": "days-held",
+      "rid": "ri.ontology.study.property.position.days-held",
+      "apiName": "daysHeld",
+      "displayName": "持有天数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "roll"
+        }
+      ]
+    },
+    "entryFieldsMissing": {
+      "id": "entry-fields-missing",
+      "rid": "ri.ontology.study.property.position.entry-fields-missing",
+      "apiName": "entryFieldsMissing",
+      "displayName": "入场字段缺少",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "exitState": {
+      "id": "exit-state",
+      "rid": "ri.ontology.study.property.position.exit-state",
+      "apiName": "exitState",
+      "displayName": "退出结论",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "ExitState",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "exitJudgedOn": {
+      "id": "exit-judged-on",
+      "rid": "ri.ontology.study.property.position.exit-judged-on",
+      "apiName": "exitJudgedOn",
+      "displayName": "结论所属交易日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "date"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "exitReason": {
+      "id": "exit-reason",
+      "rid": "ri.ontology.study.property.position.exit-reason",
+      "apiName": "exitReason",
+      "displayName": "退出原因",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "SellReason",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    }
+  }
+}

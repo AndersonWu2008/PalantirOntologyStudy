@@ -1,0 +1,396 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "buy-line",
+  "rid": "ri.ontology.study.object-type.buy-line",
+  "apiName": "BuyLine",
+  "displayName": "买入安排",
+  "pluralDisplayName": "买入安排",
+  "description": "一页上要新开的一行，顺序从买入入选抄来。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "rise",
+    "color": "#52c41a"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "buyLineId",
+  "titleKey": "buyLineId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.buy-line.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "buyLineId": {
+      "id": "buy-line-id",
+      "rid": "ri.ontology.study.property.buy-line.buy-line-id",
+      "apiName": "buyLineId",
+      "displayName": "行身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      }
+    },
+    "arrangementId": {
+      "id": "arrangement-id",
+      "rid": "ri.ontology.study.property.buy-line.arrangement-id",
+      "apiName": "arrangementId",
+      "displayName": "开盘安排",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.buy-line.ticker",
+      "apiName": "ticker",
+      "displayName": "代码",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      }
+    },
+    "rank": {
+      "id": "rank",
+      "rid": "ri.ontology.study.property.buy-line.rank",
+      "apiName": "rank",
+      "displayName": "顺序",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "plannedQuantity": {
+      "id": "planned-quantity",
+      "rid": "ri.ontology.study.property.buy-line.planned-quantity",
+      "apiName": "plannedQuantity",
+      "displayName": "计划股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "submitQuantity": {
+      "id": "submit-quantity",
+      "rid": "ri.ontology.study.property.buy-line.submit-quantity",
+      "apiName": "submitQuantity",
+      "displayName": "实际股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "plannedLimitPrice": {
+      "id": "planned-limit-price",
+      "rid": "ri.ontology.study.property.buy-line.planned-limit-price",
+      "apiName": "plannedLimitPrice",
+      "displayName": "计划限价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "submitLimitPrice": {
+      "id": "submit-limit-price",
+      "rid": "ri.ontology.study.property.buy-line.submit-limit-price",
+      "apiName": "submitLimitPrice",
+      "displayName": "实际限价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "openPrice": {
+      "id": "open-price",
+      "rid": "ri.ontology.study.property.buy-line.open-price",
+      "apiName": "openPrice",
+      "displayName": "开盘价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "openChange": {
+      "id": "open-change",
+      "rid": "ri.ontology.study.property.buy-line.open-change",
+      "apiName": "openChange",
+      "displayName": "开盘涨跌幅",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "amount": {
+      "id": "amount",
+      "rid": "ri.ontology.study.property.buy-line.amount",
+      "apiName": "amount",
+      "displayName": "金额",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "weight": {
+      "id": "weight",
+      "rid": "ri.ontology.study.property.buy-line.weight",
+      "apiName": "weight",
+      "displayName": "占账户",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "outcome": {
+      "id": "outcome",
+      "rid": "ri.ontology.study.property.buy-line.outcome",
+      "apiName": "outcome",
+      "displayName": "这一行现在怎样",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "BuyOutcome",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "outcomeAtConfirm": {
+      "id": "outcome-at-confirm",
+      "rid": "ri.ontology.study.property.buy-line.outcome-at-confirm",
+      "apiName": "outcomeAtConfirm",
+      "displayName": "确认当时怎样",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "BuyOutcome",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    },
+    "vetoed": {
+      "id": "vetoed",
+      "rid": "ri.ontology.study.property.buy-line.vetoed",
+      "apiName": "vetoed",
+      "displayName": "他否决了",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "boolean"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "decision"
+        }
+      ]
+    }
+  }
+}

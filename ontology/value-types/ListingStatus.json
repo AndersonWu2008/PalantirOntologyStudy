@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/value-type.schema.json",
+  "id": "listing-status",
+  "rid": "ri.ontology.study.value-type.listing-status",
+  "apiName": "ListingStatus",
+  "displayName": "Listing status",
+  "description": "Whether a stock is active, delisted, or suspended.",
+  "baseType": { "type": "string" },
+  "constraints": [
+    { "type": "enum", "values": ["active", "delisted", "suspended"] }
+  ]
+}

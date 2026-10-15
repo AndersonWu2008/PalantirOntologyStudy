@@ -1,0 +1,218 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "signal",
+  "rid": "ri.ontology.study.object-type.signal",
+  "apiName": "Signal",
+  "displayName": "买入入选",
+  "pluralDisplayName": "买入入选",
+  "description": "收盘后这一版做法提议新开的一只。还不是页上的买入行。开仓门关闭时不创建。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "rise",
+    "color": "#a0d911"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "signalId",
+  "titleKey": "signalId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.signal.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "signalId": {
+      "id": "signal-id",
+      "rid": "ri.ontology.study.property.signal.signal-id",
+      "apiName": "signalId",
+      "displayName": "入选身份",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "strategyId": {
+      "id": "strategy-id",
+      "rid": "ri.ontology.study.property.signal.strategy-id",
+      "apiName": "strategyId",
+      "displayName": "做法",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "sessionDate": {
+      "id": "session-date",
+      "rid": "ri.ontology.study.property.signal.session-date",
+      "apiName": "sessionDate",
+      "displayName": "交易日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "date"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.signal.ticker",
+      "apiName": "ticker",
+      "displayName": "代码",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "rank": {
+      "id": "rank",
+      "rid": "ri.ontology.study.property.signal.rank",
+      "apiName": "rank",
+      "displayName": "顺序",
+      "status": "experimental",
+      "visibility": "prominent",
+      "baseType": {
+        "type": "integer"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "plannedQuantity": {
+      "id": "planned-quantity",
+      "rid": "ri.ontology.study.property.signal.planned-quantity",
+      "apiName": "plannedQuantity",
+      "displayName": "计划股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ]
+    },
+    "plannedLimitPrice": {
+      "id": "planned-limit-price",
+      "rid": "ri.ontology.study.property.signal.planned-limit-price",
+      "apiName": "plannedLimitPrice",
+      "displayName": "计划限价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "derived"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "fill",
+  "rid": "ri.ontology.study.object-type.fill",
+  "apiName": "Fill",
+  "displayName": "成交回报",
+  "pluralDisplayName": "成交回报",
+  "description": "券商回报里的一笔成交。同一编号只插入一次。价或股数不同则拒绝，不改成新的一笔。",
+  "groups": [
+    "a-share"
+  ],
+  "icon": {
+    "name": "swap",
+    "color": "#fa541c"
+  },
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "fillId",
+  "titleKey": "fillId",
+  "properties": {
+    "domain": {
+      "id": "domain",
+      "rid": "ri.ontology.study.property.fill.domain",
+      "apiName": "domain",
+      "displayName": "域",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "selectable": true,
+        "lowCardinality": true
+      },
+      "description": "这一对象属于哪个域。当前交易域是 StockTrading。查询时用它过滤。",
+      "valueType": "Domain",
+      "sharedProperty": "domain",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "identity"
+        }
+      ]
+    },
+    "fillId": {
+      "id": "fill-id",
+      "rid": "ri.ontology.study.property.fill.fill-id",
+      "apiName": "fillId",
+      "displayName": "成交编号",
+      "status": "experimental",
+      "visibility": "hidden",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true,
+        "identifier": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "accountId": {
+      "id": "account-id",
+      "rid": "ri.ontology.study.property.fill.account-id",
+      "apiName": "accountId",
+      "displayName": "账户",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "ticker": {
+      "id": "ticker",
+      "rid": "ri.ontology.study.property.fill.ticker",
+      "apiName": "ticker",
+      "displayName": "代码",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "sessionDate": {
+      "id": "session-date",
+      "rid": "ri.ontology.study.property.fill.session-date",
+      "apiName": "sessionDate",
+      "displayName": "成交日",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "date"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "dateTime",
+        "dateTime": {
+          "pattern": "date"
+        }
+      }
+    },
+    "side": {
+      "id": "side",
+      "rid": "ri.ontology.study.property.fill.side",
+      "apiName": "side",
+      "displayName": "方向",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "valueType": "FillSide",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "price": {
+      "id": "price",
+      "rid": "ri.ontology.study.property.fill.price",
+      "apiName": "price",
+      "displayName": "成交价",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "double"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ],
+      "valueFormatting": {
+        "kind": "numeric",
+        "numeric": {
+          "style": "currency",
+          "currency": "CNY",
+          "useGrouping": true
+        }
+      }
+    },
+    "quantity": {
+      "id": "quantity",
+      "rid": "ri.ontology.study.property.fill.quantity",
+      "apiName": "quantity",
+      "displayName": "成交股数",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "long"
+      },
+      "required": true,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "once"
+        }
+      ]
+    },
+    "positionId": {
+      "id": "position-id",
+      "rid": "ri.ontology.study.property.fill.position-id",
+      "apiName": "positionId",
+      "displayName": "持仓",
+      "status": "experimental",
+      "visibility": "normal",
+      "baseType": {
+        "type": "string"
+      },
+      "required": false,
+      "renderHints": {
+        "searchable": true,
+        "sortable": true
+      },
+      "description": "空着时可以补上持仓链接。已有链接再改到另一笔则拒绝。",
+      "typeClasses": [
+        {
+          "kind": "write",
+          "name": "link-once"
+        }
+      ]
+    }
+  }
+}

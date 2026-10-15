@@ -1,0 +1,99 @@
+{
+  "$schema": "../../schema/object-type.schema.json",
+  "id": "evaluation-run",
+  "rid": "ri.ontology.study.object-type.evaluation-run",
+  "apiName": "EvaluationRun",
+  "displayName": "回测运行",
+  "pluralDisplayName": "回测运行",
+  "description": "一次策略区间回测的汇总。页上只读；重跑由 Evaluation Runner 写出。",
+  "status": "experimental",
+  "visibility": "prominent",
+  "primaryKey": "runId",
+  "titleKey": "displayName",
+  "properties": {
+    "runId": {
+      "apiName": "runId",
+      "displayName": "运行身份",
+      "baseType": { "type": "string" },
+      "required": true
+    },
+    "strategyId": {
+      "apiName": "strategyId",
+      "displayName": "做法",
+      "baseType": { "type": "string" },
+      "required": true
+    },
+    "packId": {
+      "apiName": "packId",
+      "displayName": "策略包",
+      "baseType": { "type": "string" },
+      "required": false
+    },
+    "displayName": {
+      "apiName": "displayName",
+      "displayName": "名称",
+      "baseType": { "type": "string" },
+      "required": true
+    },
+    "startDate": {
+      "apiName": "startDate",
+      "displayName": "开始日",
+      "baseType": { "type": "date" },
+      "required": true
+    },
+    "endDate": {
+      "apiName": "endDate",
+      "displayName": "结束日",
+      "baseType": { "type": "date" },
+      "required": true
+    },
+    "status": {
+      "apiName": "status",
+      "displayName": "状态",
+      "baseType": { "type": "string" },
+      "required": true
+    },
+    "annualReturn": {
+      "apiName": "annualReturn",
+      "displayName": "年化收益",
+      "baseType": { "type": "double" },
+      "required": false
+    },
+    "maxDrawdown": {
+      "apiName": "maxDrawdown",
+      "displayName": "最大回撤",
+      "baseType": { "type": "double" },
+      "required": false
+    },
+    "calmar": {
+      "apiName": "calmar",
+      "displayName": "Calmar",
+      "baseType": { "type": "double" },
+      "required": false
+    },
+    "winRate": {
+      "apiName": "winRate",
+      "displayName": "胜率",
+      "baseType": { "type": "double" },
+      "required": false
+    },
+    "tradeCount": {
+      "apiName": "tradeCount",
+      "displayName": "成交笔数",
+      "baseType": { "type": "integer" },
+      "required": false
+    },
+    "finalEquity": {
+      "apiName": "finalEquity",
+      "displayName": "最终权益",
+      "baseType": { "type": "double" },
+      "required": false
+    },
+    "notes": {
+      "apiName": "notes",
+      "displayName": "备注",
+      "baseType": { "type": "string" },
+      "required": false
+    }
+  }
+}

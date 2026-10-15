@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schema/value-type.schema.json",
+  "id": "regime-label",
+  "rid": "ri.ontology.study.value-type.regime-label",
+  "apiName": "RegimeLabel",
+  "displayName": "制度",
+  "description": "这一天的市场制度。空着表示缺少，不是震荡。",
+  "baseType": {
+    "type": "string"
+  },
+  "constraints": [
+    {
+      "type": "enum",
+      "values": [
+        "牛市趋势",
+        "高波动",
+        "震荡",
+        "熊市趋势"
+      ]
+    }
+  ]
+}

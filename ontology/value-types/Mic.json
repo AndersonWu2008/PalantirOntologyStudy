@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/value-type.schema.json",
+  "id": "mic",
+  "rid": "ri.ontology.study.value-type.mic",
+  "apiName": "Mic",
+  "displayName": "MIC",
+  "description": "ISO 10383 Market Identifier Code.",
+  "baseType": { "type": "string" },
+  "constraints": [
+    { "type": "regex", "pattern": "^[A-Z0-9]{4}$" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "apiName": "resolvedInIndustry",
+  "displayName": "供上限使用的行业",
+  "description": "最近一次非空行业。可以空。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "DailyBar",
+    "apiName": "resolvedIndustry",
+    "displayName": "行业"
+  },
+  "target": {
+    "objectType": "Industry",
+    "apiName": "dailyBars",
+    "displayName": "当日行情"
+  }
+}

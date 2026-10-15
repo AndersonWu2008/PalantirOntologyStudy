@@ -1,0 +1,16 @@
+{
+  "apiName": "supersedes",
+  "displayName": "新页作废哪一页",
+  "description": "后一页指向被作废的前一页。",
+  "cardinality": "many-to-one",
+  "source": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "previous",
+    "displayName": "上一页"
+  },
+  "target": {
+    "objectType": "PreOpenArrangement",
+    "apiName": "replacements",
+    "displayName": "后页"
+  }
+}
