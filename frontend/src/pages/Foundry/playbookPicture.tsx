@@ -6,7 +6,7 @@ const FUNCTION_HREF =
   '/ontology/manager?section=function&type=computeHuimaqiangFactors&kind=function';
 
 const HUIMAQIANG_HERE: Record<string, string[]> = {
-  computeHuimaqiangFactors: ['涨停过', '回落一截'],
+  computeHuimaqiangFactors: ['股票池', '涨停过', '回落一截'],
   computeHuimaqiangScore: ['量缩了', '够 5 只才打分'],
   selectHuimaqiangBuys: ['门开才买'],
   judgeHuimaqiangExits: ['卖出'],
@@ -88,12 +88,23 @@ function gateLine(row: Record<string, unknown>): string {
 function packLine(row: Record<string, unknown>): string {
   const pack = row.packId == null || row.packId === '' ? '' : String(row.packId);
   if (!pack) return '这一版还没写下用哪一套计算包。';
-  if (pack === 'v46Huimaqiang') return '挑股票按涨停回马枪这一套，点过去看 Function。';
+  if (pack === 'v46Huimaqiang') return '挑股票按涨停回马枪 1 这一套，点过去看 Function。';
   return `挑股票的话在 ${pack}。`;
 }
 
+const POOL: PictureNode = {
+  name: '股票池',
+  line: '只在四百多只里挑，不是全市场。',
+  more: '涨停、回落、缩量都在这一套里。',
+};
+
+const RECORD: PictureNode = {
+  name: '成绩',
+  line: '最近几年年化 23.02%，回撤 12.13%，Calmar 1.90。',
+};
+
 export function playbookNodes(row: Record<string, unknown>): PictureNode[] {
-  return [
+  const nodes: PictureNode[] = [
     { name: '这一版', line: '这是写下那页时的那一版。', more: '改一处是新的一版。' },
     { name: '牛市', line: sleeveLine(row, 'bull') },
     { name: '高波动', line: sleeveLine(row, 'highVol') },
@@ -103,9 +114,14 @@ export function playbookNodes(row: Record<string, unknown>): PictureNode[] {
     { name: '门', line: gateLine(row) },
     { name: '计算包', line: packLine(row) },
   ];
+  if (String(row.packId ?? '') === 'v46Huimaqiang') {
+    nodes.splice(7, 0, POOL, RECORD);
+  }
+  return nodes;
 }
 
 const FLOW: PictureNode[] = [
+  POOL,
   { name: '涨停过', line: '近 20 日至少 1 次，近 60 日不超过 5 次。' },
   { name: '回落一截', line: '离 20 日高点在跌 12% 到涨 0.5%。' },
   { name: '量缩了', line: '回落和缩量各占一半。' },

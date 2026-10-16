@@ -322,7 +322,7 @@ export default function EvaluationPage() {
     <FoundryShell
       app="Ontology"
       title="Evaluation"
-      lead="策略回测对照。窗口和涨停回马枪这一段日子对齐。"
+      lead="策略回测对照。窗口和涨停回马枪 1 这一段日子对齐。"
       actions={[
         { label: '开盘前安排', to: '/workshop/pre-open?date=2026-08-06' },
         { label: 'Data Health', to: '/data/health' },
@@ -349,7 +349,7 @@ export default function EvaluationPage() {
               <ul className="evaluation-diff-notes">
                 <li>Evaluation 可记成本/滑点；Workshop 计划限价仍用信号日收盘，人手回报可抄开盘价。</li>
                 <li>Workshop 有可用资金约束（买不起就跳过）；引擎按权重配仓，笔数通常更多。</li>
-                <li>默认窗口对齐涨停回马枪这一段：{DEFAULT_WINDOW.from} → {DEFAULT_WINDOW.to}（可改）。</li>
+                <li>默认窗口对齐涨停回马枪 1 这一段：{DEFAULT_WINDOW.from} → {DEFAULT_WINDOW.to}（可改）。</li>
               </ul>
             }
           />

@@ -6,7 +6,7 @@ async function main() {
   const body: Record<string, unknown> = {
     ...v44,
     strategyId: "v46-huimaqiang",
-    displayName: "涨停回马枪",
+    displayName: "涨停回马枪 1",
     packId: "v46Huimaqiang",
     priceMin: 5,
     priceMax: 50,

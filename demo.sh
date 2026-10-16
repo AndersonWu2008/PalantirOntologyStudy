@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 起数据库、接口、页面，并写入涨停回马枪这一套演示对象。
+# 起数据库、接口、页面，并写入涨停回马枪 1 这一套演示对象。
 set -euo pipefail
 root="$(cd "$(dirname "$0")" && pwd)"
 cd "$root"
@@ -45,7 +45,7 @@ fi
 (cd database-api && npx tsx ../pipeline/seed-demo.ts)
 docker compose exec -T stock_ontology \
   psql -U ontology -d stock_ontology \
-  -c "UPDATE strategy SET display_name = '涨停回马枪' WHERE strategy_id = 'v46-huimaqiang';"
+  -c "UPDATE strategy SET display_name = '涨停回马枪 1' WHERE strategy_id = 'v46-huimaqiang';"
 
 if ! curl -sf http://127.0.0.1:5173 >/dev/null; then
   if [ ! -d frontend/node_modules ]; then
@@ -77,7 +77,7 @@ http://localhost:5173/course
 类型
 http://localhost:5173/ontology
 
-涨停回马枪
+涨停回马枪 1
 http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang
 
 明早那一页

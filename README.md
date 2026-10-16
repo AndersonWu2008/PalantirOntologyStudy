@@ -2,7 +2,7 @@
 
 用一套能点开的页面，学 Palantir 的 Ontology 怎么装下一件具体的事。这件事是沪深 A 股的开盘安排：明天买什么、卖什么、还是空仓。
 
-一条命令就能看到这一版做法，名字叫 **涨停回马枪**：
+一条命令就能看到这一版做法，名字叫 **涨停回马枪 1**：
 
 ```bash
 ./demo.sh
@@ -15,7 +15,7 @@ flowchart LR
   page["页面 :5173"] --> api["对象接口 :3010"]
   api --> db["PostgreSQL :5436"]
   scripts["pipeline 脚本"] --> api
-  types["ontology/v44 类型定义"] --> page
+  types["类型定义"] --> page
 ```
 
 点图上的一个词，只出现一句人话。走查写在 [`docs/走查.md`](docs/走查.md)。
@@ -37,7 +37,7 @@ Ontology 是给一个领域用的类型模型：有哪些东西可以单独点�
 
 这里的领域是 **StockTrading**。一只股票、一个交易日、一条日行情、一版做法、一页开盘安排，各是一种对象。改一版做法上的数，会新写一只对象；已经写下的开盘安排还指着当时那一版。
 
-当前这一版做法叫 **涨停回马枪**。地址里的编号是 `v46-huimaqiang`。袖套上的数钉在这只对象上。选股顺序写在函数包里，实现在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。
+当前这一版做法叫 **涨停回马枪 1**。最近几年年化 23.02%，回撤 12.13%，Calmar 1.90。选股也在这一套里：只从四百多只股票池里挑，不是全市场。袖套上的数钉在这只对象上。挑选顺序在 [`pipeline/functions/huimaqiang.ts`](pipeline/functions/huimaqiang.ts)。
 
 ## 你会看到什么
 
@@ -45,7 +45,7 @@ Ontology 是给一个领域用的类型模型：有哪些东西可以单独点�
 | --- | --- |
 | 课程 | http://localhost:5173/course |
 | 全部对象类型 | http://localhost:5173/ontology |
-| 涨停回马枪 | http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang |
+| 涨停回马枪 1 | http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang |
 | 回马枪怎么挑股票 | http://localhost:5173/ontology/manager?section=function&type=computeHuimaqiangFactors&kind=function |
 | 明早那一页 | http://localhost:5173/workshop/pre-open?date=2026-10-15 |
 
@@ -131,7 +131,7 @@ http://localhost:5173/ontology/object-view?type=Strategy&id=v46-huimaqiang
 
 图上是这一版的袖套：牛市、高波动、震荡、熊市、价带、门、计算包。点 **牛市**，会看到这一套止盈、回落、天数、只数和仓位。点 **计算包**，会跳到选股函数。
 
-对象列表在 http://localhost:5173/ontology?focus=Strategy 。点中 **涨停回马枪** 那一行，同一张图会出现在表格上方。
+对象列表在 http://localhost:5173/ontology?focus=Strategy 。点中 **涨停回马枪 1** 那一行，同一张图会出现在表格上方。
 
 空库时这里没有这一行。类型页看得到「做法」，对象页要等数据写进来。见下面「把对象写进库」。
 
@@ -174,13 +174,11 @@ npx tsx pipeline/action-server.ts
 
 [`pipeline/sync-pool.ts`](pipeline/sync-pool.ts) 读取本机的 `/tmp/pool-stocks.json` 和 `/tmp/pool-bars.jsonl`，把股票和日行情写进接口。这两个文件要自己准备。
 
-已有做法 `v44` 时，可以用下面的命令再写下涨停回马枪。它读取 `v44`，写下 `v46-huimaqiang`：
+库里已经有上一版做法时，可以用下面的命令再写涨停回马枪 1。演示不走这条，`./demo.sh` 会直接写入这一版。
 
 ```bash
 npx tsx pipeline/publish-v46-strategy.ts
 ```
-
-库里没有 `v44` 时，这条命令会失败。演示不走这条。`./demo.sh` 会直接写入涨停回马枪。
 
 其他脚本都在 [`pipeline/`](pipeline/)，通过环境变量 `DATABASE_API`（默认 `http://localhost:3010`）访问对象接口。
 
@@ -202,7 +200,7 @@ ontology/v44/          对象类型、链接、值类型、logic.json
 database-api/          唯一访问 PostgreSQL 的 HTTP 接口，端口 3010
 frontend/              课程页和 Foundry 风格的各个页面，端口 5173
 pipeline/              收盘、开盘、同步、回马枪函数、动作
-docs/走查.md           十分钟看完涨停回马枪
+docs/走查.md           十分钟看完涨停回马枪 1
 docs/000_Overview/     从「明天要提交什么」往回推
 docs/000_Stock_Object_Type/   A 股类型目录
 CONTEXT.md             Palantir 词和这个领域里的词
