@@ -2,7 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
+const pagesBase = process.env.GITHUB_PAGES === 'true' ? '/PalantirOntologyStudy/' : '/';
+
 export default defineConfig({
+  base: pagesBase,
   plugins: [react()],
   resolve: {
     alias: {

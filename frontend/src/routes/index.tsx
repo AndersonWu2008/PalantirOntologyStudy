@@ -76,6 +76,8 @@ const LayoutWrapper: React.FC = () => {
   );
 };
 
+const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export const router = createBrowserRouter([
   {
     path: '/login',
@@ -89,6 +91,6 @@ export const router = createBrowserRouter([
       element: route.element,
     })),
   },
-]);
+], routerBase ? { basename: routerBase } : undefined);
 
 export default flatRoutes;

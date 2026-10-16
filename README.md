@@ -20,6 +20,8 @@ flowchart LR
 
 点图上的一个词，只出现一句人话。走查写在 [`docs/走查.md`](docs/走查.md)。
 
+在线页面（只有前端，对象要本机接口才有数）：https://andersonwu2008.github.io/PalantirOntologyStudy/
+
 ## 目录
 
 - [它解决什么](#它解决什么)
