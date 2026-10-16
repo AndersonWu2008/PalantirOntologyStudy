@@ -20,7 +20,7 @@ flowchart LR
 
 点图上的一个词，只出现一句人话。走查写在 [`docs/走查.md`](docs/走查.md)。
 
-在线页面（只有前端，对象要本机接口才有数）：https://andersonwu2008.github.io/PalantirOntologyStudy/
+在线页面带了一份演示数据：类型、涨停回马枪 1、演示账户、2026-10-15 那一页，还有四百多只股票。要改数，在本机跑。https://andersonwu2008.github.io/PalantirOntologyStudy/
 
 ## 目录
 

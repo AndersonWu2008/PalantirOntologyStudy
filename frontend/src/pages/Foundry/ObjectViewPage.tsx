@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { FoundrySection, FoundryShell } from './FoundryShell';
 import { propertyTitle, typeTitle } from '@/pages/DataExplorer/stockFallback';
 import { StrategyPlaybookMap } from './playbookPicture';
+import { publishedGet } from '@/services/publishedRead';
 import './ObjectViewPage.less';
 
 const API = 'http://127.0.0.1:3010';
@@ -203,6 +204,7 @@ function cell(value: unknown): string {
 }
 
 async function getJson<T>(url: string): Promise<T> {
+  if (url.startsWith(API)) return publishedGet<T>(url.slice(API.length));
   const response = await fetch(url);
   if (!response.ok) throw new Error(`读取失败 ${response.status}`);
   return response.json() as Promise<T>;

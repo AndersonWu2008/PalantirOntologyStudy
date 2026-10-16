@@ -3,7 +3,7 @@
  * App name + secondary tabs (from sidebarNavConfig children) + search.
  */
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import { sidebarNavConfig, type NavChild, type NavItem } from '../Sidebar/SidebarNavConfig';
@@ -22,6 +22,38 @@ function matchChild(children: NavChild[] | undefined, pathname: string): NavChil
     (child) => pathname === child.path || pathname.startsWith(`${child.path}/`),
   );
   return hits.sort((left, right) => right.path.length - left.path.length)[0];
+}
+
+let visitCountRequest: Promise<number | null> | null = null;
+
+function loadVisitCount(): Promise<number | null> {
+  if (!visitCountRequest) {
+    visitCountRequest = fetch('https://bsz.saop.cc/api', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'x-bsz-referer': window.location.href },
+    })
+      .then((response) => response.json() as Promise<{ success?: boolean; data?: { site_uv?: number } }>)
+      .then((body) => (body.success && typeof body.data?.site_uv === 'number' ? body.data.site_uv : null))
+      .catch(() => null);
+  }
+  return visitCountRequest;
+}
+
+function VisitCount() {
+  const [count, setCount] = useState<number | null>(null);
+  useEffect(() => {
+    if (import.meta.env.VITE_STATIC_DATA !== 'true') return;
+    let cancelled = false;
+    void loadVisitCount().then((value) => {
+      if (!cancelled) setCount(value);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  if (count == null) return null;
+  return <span className="ws-visits">{count} 人来过</span>;
 }
 
 export const Header: React.FC = () => {
@@ -97,7 +129,9 @@ export const Header: React.FC = () => {
           ) : null}
         </form>
 
-        <div className="ws-bar__end" />
+        <div className="ws-bar__end">
+          <VisitCount />
+        </div>
       </div>
 
       {showTabs ? (

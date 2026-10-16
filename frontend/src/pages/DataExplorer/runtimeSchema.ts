@@ -1,4 +1,4 @@
-const apiBase = 'http://127.0.0.1:3010';
+import { publishedGet } from '@/services/publishedRead';
 
 export type RuntimeProperty = {
   apiName: string;
@@ -45,11 +45,7 @@ export function runtimeSchema(): RuntimeSchema | null {
 export function ensureRuntimeSchema(): Promise<RuntimeSchema> {
   if (cached) return Promise.resolve(cached);
   if (!pending) {
-    pending = fetch(`${apiBase}/schema`)
-      .then((response) => {
-        if (!response.ok) throw new Error(`schema ${response.status}`);
-        return response.json() as Promise<RuntimeSchema>;
-      })
+    pending = publishedGet<RuntimeSchema>('/schema')
       .then((schema) => {
         cached = schema;
         return schema;

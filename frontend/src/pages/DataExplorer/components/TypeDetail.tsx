@@ -10,6 +10,7 @@ import {
   type CatalogObject,
 } from '../stockFallback';
 import { ensureRuntimeSchema } from '../runtimeSchema';
+import { publishedGet } from '@/services/publishedRead';
 import { useDataExplorerStore } from '../store';
 import { HuimaqiangFlow, StrategyPlaybookMap, isHuimaqiangFunction } from '@/pages/Foundry/playbookPicture';
 
@@ -57,8 +58,6 @@ const explorerFilters: Record<string, FilterField[]> = {
 
 const viewableTypes = new Set(['PreOpenArrangement', 'Position', 'Stock', 'Strategy']);
 const noFilters: FilterField[] = [];
-
-const apiBase = 'http://127.0.0.1:3010';
 
 const { Title, Text } = Typography;
 
@@ -152,14 +151,7 @@ function ObjectSet({ detail }: { detail: CatalogObject }) {
       const value = applied[field.key]?.trim();
       if (value) query.set(field.key, value);
     }
-    fetch(`${apiBase}/${collection}?${query}`)
-      .then(async (response) => {
-        if (!response.ok) {
-          const body = await response.json().catch(() => ({})) as { error?: string };
-          throw new Error(body.error ?? `读取失败 ${response.status}`);
-        }
-        return response.json() as Promise<Record<string, unknown>[]>;
-      })
+    publishedGet<Record<string, unknown>[]>(`/${collection}?${query}`)
       .then((body) => {
         if (!cancelled) setRows(body);
       })
@@ -222,14 +214,13 @@ function ObjectSet({ detail }: { detail: CatalogObject }) {
 
   async function showBuyLines(arrangementId: string) {
     setLinkedBuys(null);
-    const response = await fetch(
-      `${apiBase}/buy-lines?domain=StockTrading&arrangementId=${encodeURIComponent(arrangementId)}`,
-    );
-    if (!response.ok) {
-      setError(`买入行读取失败 ${response.status}`);
-      return;
+    try {
+      setLinkedBuys(await publishedGet<Record<string, unknown>[]>(
+        `/buy-lines?domain=StockTrading&arrangementId=${encodeURIComponent(arrangementId)}`,
+      ));
+    } catch (reason: unknown) {
+      setError(reason instanceof Error ? reason.message : '买入行读取失败');
     }
-    setLinkedBuys(await response.json() as Record<string, unknown>[]);
   }
 
   if (!collection) return <Empty description="这个类型还没有对象集合" />;
